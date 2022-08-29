@@ -977,7 +977,7 @@ a:hover {
     bottom: 50px;
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet {
+.swiper-pagination-bullet {
     width: 18px;
     height: 10px;
     background-color: #ffffff;
@@ -986,7 +986,7 @@ a:hover {
     transition: 0.3s;
 }
 
-.intro .swiper-pagination .swiper-pagination-bullet-active {
+.swiper-pagination-bullet-active {
     background-color: #2eca6a;
     width: 36px;
 }
@@ -1204,6 +1204,11 @@ a:hover {
     transition: 0.8s all ease-in-out;
 }
 
+.card-box-a .swiper-pagination,
+.card-box-b .swiper-pagination {
+    display: none;
+}
+
 @media (min-width: 768px) {
     .card-box-a:hover .img-a,
     .card-box-a:hover .img-b,
@@ -1362,7 +1367,7 @@ a:hover {
 .card-footer-a {
     width: 100%;
     position: absolute;
-    z-index: 2;
+    z-index: 110;
     background-color: #2eca6a;
 }
 
@@ -1950,6 +1955,17 @@ a:hover {
 --------------------------------------------------------------*/
 .testimonials-box {
     padding: 1rem 0;
+}
+
+.testimonial-carousel .swiper-pagination {
+    bottom: -10px;
+}
+
+.testimonial-carousel .swiper-pagination .swiper-pagination-bullet {
+    background-color: #aaa;
+}
+.testimonial-carousel .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #2eca6a;
 }
 
 .testimonials-box .testimonial-avatar {

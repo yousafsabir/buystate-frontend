@@ -99,7 +99,7 @@
     });
 
     /**
-     * Intro Carousel
+     * Intro Carousel   =========== Done  ============
      */
     new Swiper(".intro-carousel", {
         speed: 600,
