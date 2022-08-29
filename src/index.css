@@ -157,6 +157,45 @@ a:hover {
     z-index: 2;
 }
 
+/* login & Register */
+.btn-login {
+    background-color: #2eca6a;
+    border-color: #2eca6a;
+    color: #fff;
+}
+.btn-register {
+    background-color: transparent;
+    border-color: #2eca6a;
+    color: #2eca6a;
+}
+
+.btn-submit-form {
+    width: 10rem;
+    height: 3.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+    letter-spacing: 0.05rem;
+    background-color: #000;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-submit-form:hover {
+    background-color: #2eca6a;
+    color: #000;
+}
+.btn-submit-form:disabled {
+    cursor: not-allowed;
+    background-color: #222;
+    border-color: #222;
+}
+.btn-submit-form:disabled:hover {
+    background-color: hsl(143, 50%, 35%);
+    border-color: #222;
+}
+
 /*------/ Bg Image /------*/
 .bg-image {
     background-repeat: no-repeat;

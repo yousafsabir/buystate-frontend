@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { useFindPath } from "../hooks/getPath";
 
 const Navbar = (props) => {
     const [openSearch, setOpenSearch] = useState(false);
+    const path = useFindPath();
     return (
         <nav
             className={
@@ -26,81 +29,56 @@ const Navbar = (props) => {
                     <span></span>
                 </button>
                 <a className="navbar-brand text-brand" href="index.html">
-                    Estate<span className="color-b">Agency</span>
+                    Buy<span className="color-b">Estate</span>
                 </a>
 
                 <div
-                    className="navbar-collapse collapse justify-content-center"
+                    className="navbar-collapse collapse justify-content-center align-items-center"
                     id="navbarDefault"
                 >
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" href="index.html">
+                            <Link
+                                to={"/"}
+                                className={
+                                    path === "/"
+                                        ? "nav-link active"
+                                        : "nav-link"
+                                }
+                            >
                                 Home
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link " href="about.html">
+                            <Link
+                                to={"/about"}
+                                className={
+                                    path === "/about"
+                                        ? "nav-link active"
+                                        : "nav-link"
+                                }
+                            >
                                 About
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">
                             <a className="nav-link " href="property-grid.html">
-                                Property
+                                Properties
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link " href="blog-grid.html">
-                                Blog
-                            </a>
+                            <Link to={"/register"} className="btn btn-register">
+                                Register
+                            </Link>
                         </li>
 
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="/"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                Pages
-                            </a>
-                            <div className="dropdown-menu">
-                                <a
-                                    className="dropdown-item "
-                                    href="property-single.html"
-                                >
-                                    Property Single
-                                </a>
-                                <a
-                                    className="dropdown-item "
-                                    href="blog-single.html"
-                                >
-                                    Blog Single
-                                </a>
-                                <a
-                                    className="dropdown-item "
-                                    href="agents-grid.html"
-                                >
-                                    Agents Grid
-                                </a>
-                                <a
-                                    className="dropdown-item "
-                                    href="agent-single.html"
-                                >
-                                    Agent Single
-                                </a>
-                            </div>
-                        </li>
                         <li className="nav-item">
-                            <a className="nav-link " href="contact.html">
-                                Contact
-                            </a>
+                            <Link to={"/login"} className="btn btn-register">
+                                Login
+                            </Link>
                         </li>
                     </ul>
                 </div>

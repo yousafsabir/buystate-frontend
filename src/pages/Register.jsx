@@ -1,0 +1,183 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { register } from "../redux/slices/Auth";
+
+const Register = () => {
+    const dispatch = useDispatch();
+    const [form, setForm] = useState({
+        fName: "",
+        lName: "",
+        userName: "",
+        phone: "",
+        email: "",
+        password: "",
+    });
+    const { fName, lName, userName, phone, email, password } = form;
+    const isValid = Boolean(
+        fName && lName && userName && phone && email && password
+    );
+    const submit = () => {
+        dispatch(register(form));
+    };
+    return (
+        <>
+            <div style={{ height: "200px" }}></div>
+            <div className="container">
+                <h2 className="text-center mb-5" style={{ fontSize: "3rem" }}>
+                    Register
+                </h2>
+                <form
+                    role="form"
+                    class="php-email-form"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        submit();
+                    }}
+                >
+                    <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-8">
+                            <div class="row px-3">
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            name="fName"
+                                            value={fName}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="First Name"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            name="lName"
+                                            value={lName}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            type="text"
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="Last Name"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            name="userName"
+                                            value={userName}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="Username"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            name="phone"
+                                            value={phone}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            type="text"
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="Your Phone Number"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="Your Email"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <input
+                                            name="password"
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            class="form-control form-control-lg form-control-a"
+                                            placeholder="Set Password"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-12 d-flex justify-content-center mb-3">
+                                    <button
+                                        type="submit"
+                                        class="btn-submit-form"
+                                        disabled={!isValid}
+                                    >
+                                        Register
+                                    </button>
+                                </div>
+                                <div class="col-md-12 text-center color-text-a">
+                                    <span>
+                                        Already a member?{" "}
+                                        <Link to={"/login"} className="color-a">
+                                            Login
+                                        </Link>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-2"></div>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
+};
+
+export default Register;

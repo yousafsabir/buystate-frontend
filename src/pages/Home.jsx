@@ -27,17 +27,8 @@ const Home = () => {
             setActiveOffset(false);
         }
     });
-
-    const propertiesPagination = {
-        type: "bullets",
-        clickable: true,
-        renderBullet: function () {
-            return '<div className="propery-carousel-pagination carousel-pagination"></div>';
-        },
-    };
     return (
         <div>
-            <Navbar reduce={activeOffset} />
             <div id="for-backtotop"></div>
 
             {/* --------------- */}
@@ -731,8 +722,6 @@ const Home = () => {
                     </div>
                 </section>
             </main>
-            <Footer />
-            <BackToTop isActive={activeOffset} />
         </div>
     );
 };
