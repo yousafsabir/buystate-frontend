@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import empty from "is-empty";
 import SearchBar from "./SearchBar";
 import { useFindPath } from "../hooks/getPath";
+import NavCTA from "./NavCTA";
+import Profile from "./Profile";
 
 const Navbar = (props) => {
+    const { user } = useSelector((state) => state.auth);
     const [openSearch, setOpenSearch] = useState(false);
     const path = useFindPath();
     return (
@@ -69,17 +74,7 @@ const Navbar = (props) => {
                             </a>
                         </li>
 
-                        <li className="nav-item">
-                            <Link to={"/register"} className="btn btn-register">
-                                Register
-                            </Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link to={"/login"} className="btn btn-login">
-                                Login
-                            </Link>
-                        </li>
+                        {!empty(user) ? <Profile /> : <NavCTA />}
                     </ul>
                 </div>
 

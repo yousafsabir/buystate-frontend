@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux/es/exports";
+import { BsPersonCircle } from "react-icons/bs";
 
 const Profile = () => {
+    const { user } = useSelector((state) => state.auth);
     return (
         <li className="nav-item dropdown">
             <a
@@ -12,11 +15,12 @@ const Profile = () => {
                 aria-haspopup="true"
                 aria-expanded="false"
             >
-                Pages
+                Profile
             </a>
             <div className="dropdown-menu">
                 <a className="dropdown-item " href="property-single.html">
-                    Property Single
+                    <BsPersonCircle style={{ fontSize: "1.35rem" }} />{" "}
+                    {user?.fName}
                 </a>
                 <a className="dropdown-item " href="blog-single.html">
                     Blog Single

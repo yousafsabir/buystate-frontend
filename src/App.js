@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
+    const isMobile = window.innerWidth <= 1024 ? true : false;
+    console.log(window.innerWidth);
     const [preloader, setPreloader] = useState(true);
     window.addEventListener("load", () => {
         setPreloader(false);
@@ -34,7 +36,7 @@ function App() {
             </Routes>
             <Footer />
             <BackToTop isActive={activeOffset} />
-            {preloader && <div id="preloader"></div>}
+            {!isMobile && preloader && <div id="preloader"></div>}
         </div>
     );
 }
