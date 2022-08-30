@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Properties from "./pages/Properties";
 import Register from "./pages/Register";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/properties" element={<Properties />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
             </Routes>

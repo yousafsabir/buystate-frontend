@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SlideAbout1 from "../assets/img/slide-about-1.jpg";
 import About2 from "../assets/img/about-2.jpg";
 import Agent2 from "../assets/img/agent-2.jpg";
@@ -30,7 +31,7 @@ const About = () => {
                                 >
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item">
-                                            <a href="#">Home</a>
+                                            <Link to="/">Home</Link>
                                         </li>
                                         <li
                                             className="breadcrumb-item active"
