@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../redux/slices/Auth";
-import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, resetStatus } from "../redux/slices/Auth";
 
 const Login = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { loading, success, error } = useSelector((state) => state.auth);
 
     const [idType, setIdType] = useState("");
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
 
+    // Check if the use have attempted all fields
     const isValid = Boolean(idType && userId && password);
 
+    // Setting Placeholder According to idType
     const [text, setText] = useState("Select an option above");
     useEffect(() => {
         if (idType === "username") {
@@ -23,6 +26,17 @@ const Login = () => {
             setText("Enter Phone");
         }
     }, [idType]);
+
+    // Clearing the form on success
+    useEffect(() => {
+        if (!loading && success) {
+            setIdType("");
+            setUserId("");
+            setPassword("");
+            dispatch(resetStatus());
+            navigate("/");
+        }
+    }, [loading]);
     const submit = () => {
         dispatch(login({ idType, userId, password }));
     };

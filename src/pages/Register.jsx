@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { register } from "../redux/slices/Auth";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { register, resetStatus } from "../redux/slices/Auth";
 
 const Register = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { loading, success, error, editMode } = useSelector(
+        (state) => state.auth
+    );
+
     const [form, setForm] = useState({
         fName: "",
         lName: "",
@@ -14,9 +19,28 @@ const Register = () => {
         password: "",
     });
     const { fName, lName, userName, phone, email, password } = form;
+
+    // Check if the use have attempted all fields
     const isValid = Boolean(
         fName && lName && userName && phone && email && password
     );
+
+    // Clearing the form on success
+    useEffect(() => {
+        if (!loading && success) {
+            setForm({
+                fName: "",
+                lName: "",
+                userName: "",
+                phone: "",
+                email: "",
+                password: "",
+            });
+            dispatch(resetStatus());
+            navigate("/");
+        }
+    }, [loading]);
+
     const submit = () => {
         dispatch(register(form));
     };
@@ -25,7 +49,7 @@ const Register = () => {
             <div style={{ height: "200px" }}></div>
             <div className="container">
                 <h2 className="text-center mb-5" style={{ fontSize: "3rem" }}>
-                    Register
+                    {editMode ? "Update Profile" : "Register"}
                 </h2>
                 <form
                     role="form"
@@ -159,7 +183,7 @@ const Register = () => {
                                         class="btn-submit-form"
                                         disabled={!isValid}
                                     >
-                                        Register
+                                        {editMode ? "Update" : "Register"}
                                     </button>
                                 </div>
                                 <div class="col-md-12 text-center color-text-a">

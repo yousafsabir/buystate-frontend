@@ -76,7 +76,7 @@ const Navbar = (props) => {
                         </li>
 
                         <li className="nav-item">
-                            <Link to={"/login"} className="btn btn-register">
+                            <Link to={"/login"} className="btn btn-login">
                                 Login
                             </Link>
                         </li>

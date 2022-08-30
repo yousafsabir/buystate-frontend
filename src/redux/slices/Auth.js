@@ -49,33 +49,61 @@ const Auth = createSlice({
     name: "auth",
     initialState: {
         user: user ?? null,
+        loading: false,
+        success: false,
+        error: false,
+        editUser: false,
+        message: "",
     },
-    reducers: {},
+    reducers: {
+        resetStatus: (state) => {
+            state.loading = false;
+            state.success = false;
+            state.error = false;
+        },
+        setEditMode: (state) => {
+            state.editUser = true;
+        },
+    },
     extraReducers: (builder) => {
         // For Login
         builder
             .addCase(login.pending, (state) => {
+                state.loading = true;
                 toast("🕓 Logging in");
             })
             .addCase(login.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
                 state.user = action.payload;
-                toast("✔ Logged In");
+                toast(`😇 Welcome back ${state.user.fName}`);
             })
             .addCase(login.rejected, (state, action) => {
+                state.loading = false;
+                state.error = true;
+                state.message = action.payload;
                 toast(`🔺 ${action.payload}`);
             })
             // For Register
             .addCase(register.pending, (state) => {
+                state.loading = true;
                 toast("🕓 Signing up");
             })
             .addCase(register.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
                 state.user = action.payload;
                 toast(`😇 welcome ${state.user.fName}`);
             })
             .addCase(register.rejected, (state, action) => {
+                state.loading = false;
+                state.error = true;
+                state.message = action.payload;
                 toast(`🔺 ${action.payload}`);
             });
     },
 });
+
+export const { resetStatus, setEditMode } = Auth.actions;
 
 export default Auth.reducer;
