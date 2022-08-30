@@ -9,6 +9,10 @@ const user = JSON.parse(localStorage.getItem("user"));
 const apiUrl = "http://localhost:5000/api/users/";
 
 // thunks
+
+// -----
+// Login
+// -----
 export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
     try {
         const res = await axios.post(apiUrl + "login", args);
@@ -24,6 +28,10 @@ export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
         thunkApi.rejectWithValue(message);
     }
 });
+
+// --------
+// Register
+// --------
 export const register = createAsyncThunk(
     "auth/register",
     async (args, thunkApi) => {
@@ -33,6 +41,26 @@ export const register = createAsyncThunk(
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;
             }
+        } catch (error) {
+            console.log("complete error", error);
+            console.log("error message:", message);
+            const message =
+                error.response.data.message ||
+                error.message ||
+                error.toString();
+            thunkApi.rejectWithValue(message);
+        }
+    }
+);
+
+// ------
+// Logout
+// ------
+export const logout = createAsyncThunk(
+    "auth/logout",
+    async (args, thunkApi) => {
+        try {
+            localStorage.removeItem("user");
         } catch (error) {
             console.log("complete error", error);
             console.log("error message:", message);
@@ -96,6 +124,21 @@ const Auth = createSlice({
                 toast(`😇 welcome ${state.user.fName}`);
             })
             .addCase(register.rejected, (state, action) => {
+                state.loading = false;
+                state.error = true;
+                state.message = action.payload;
+                toast(`🔺 ${action.payload}`);
+            })
+            // For Logout
+            .addCase(logout.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.loading = false;
+                state.success = true;
+                toast("✔ Logged out successfully");
+            })
+            .addCase(logout.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;

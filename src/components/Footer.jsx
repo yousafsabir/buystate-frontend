@@ -211,6 +211,10 @@ const Footer = () => {
                             <div className="credits">
                                 Designed with 🔥 & 💖 by{" "}
                                 <span className="color-a">M.Yousaf</span>
+                                <br />
+                                in <span className="color-a">
+                                    Hackathon
+                                </span> at <span className="color-a">SMIT</span>
                             </div>
                         </div>
                     </div>

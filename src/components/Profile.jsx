@@ -1,8 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux/es/exports";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { logout } from "../redux/slices/Auth";
+import { Link } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 
 const Profile = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     return (
         <li className="nav-item dropdown">
@@ -23,14 +26,20 @@ const Profile = () => {
                     {user?.fName}
                 </a>
                 <a className="dropdown-item " href="blog-single.html">
-                    Blog Single
+                    Favourites
                 </a>
                 <a className="dropdown-item " href="agents-grid.html">
-                    Agents Grid
+                    List a Property
                 </a>
                 <a className="dropdown-item " href="agent-single.html">
-                    Agent Single
+                    My Listings
                 </a>
+                <button
+                    className="dropdown-item btn btn-register"
+                    onClick={() => dispatch(logout())}
+                >
+                    Logout
+                </button>
             </div>
         </li>
     );
