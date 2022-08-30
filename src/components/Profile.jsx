@@ -35,7 +35,8 @@ const Profile = () => {
                     My Listings
                 </a>
                 <button
-                    className="dropdown-item btn btn-register"
+                    className="btn btn-register"
+                    style={{ marginInline: "1.125rem" }}
                     onClick={() => dispatch(logout())}
                 >
                     Logout

@@ -69,9 +69,16 @@ const Navbar = (props) => {
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link " href="property-grid.html">
+                            <Link
+                                to={"/properties"}
+                                className={
+                                    path === "/properties"
+                                        ? "nav-link active"
+                                        : "nav-link"
+                                }
+                            >
                                 Properties
-                            </a>
+                            </Link>
                         </li>
 
                         {!empty(user) ? <Profile /> : <NavCTA />}
