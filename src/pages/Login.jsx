@@ -12,13 +12,15 @@ const Login = () => {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
 
+    // console.log(idType, userId, password);
+
     // Check if the use have attempted all fields
     const isValid = Boolean(idType && userId && password);
 
     // Setting Placeholder According to idType
     const [text, setText] = useState("Select an option above");
     useEffect(() => {
-        if (idType === "username") {
+        if (idType === "userName") {
             setText("Enter Username");
         } else if (idType === "email") {
             setText("Enter Email");
@@ -81,7 +83,7 @@ const Login = () => {
                                             >
                                                 select an option
                                             </option>
-                                            <option value={"username"}>
+                                            <option value={"userName"}>
                                                 username
                                             </option>
                                             <option value={"email"}>
