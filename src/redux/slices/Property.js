@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import Toast from "../../utils/Toast";
 
 // Api Url
-const apiUrl = "http://localhost:5000/api/properties/";
+const apiUrl = process.env.REACT_APP_API_URL + "api/properties/";
 
 export const addProperty = createAsyncThunk(
     "property/add",

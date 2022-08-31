@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const user = JSON.parse(localStorage.getItem("user"));
 
 // Api Url
-const apiUrl = "http://localhost:5000/api/users/";
+const apiUrl = process.env.REACT_APP_API_URL + "api/users/";
 
 // thunks
 
