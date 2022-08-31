@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Toast from "../../utils/Toast";
 
 // get user from local storage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -99,36 +100,36 @@ const Auth = createSlice({
         builder
             .addCase(login.pending, (state) => {
                 state.loading = true;
-                toast("🕓 Logging in");
+                Toast.loading("Logging in");
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
                 state.user = action.payload;
-                toast(`😇 Welcome back ${state.user.fName}`);
+                Toast.success(`Welcome back ${state.user.fName}`, "😇");
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
-                toast(`🔺 ${action.payload}`);
+                Toast.error(`${action.payload}`);
             })
             // For Register
             .addCase(register.pending, (state) => {
                 state.loading = true;
-                toast("🕓 Signing up");
+                Toast.loading("Signing up");
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
                 state.user = action.payload;
-                toast(`😇 welcome ${state.user.fName}`);
+                Toast.success(`welcome ${state.user.fName}`, "😇");
             })
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
-                toast(`🔺 ${action.payload}`);
+                Toast.error(`${action.payload}`);
             })
             // For Logout
             .addCase(logout.pending, (state) => {
@@ -138,13 +139,13 @@ const Auth = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.user = null;
-                toast("✔ Logged out successfully");
+                Toast.success("Logged out successfully");
             })
             .addCase(logout.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
-                toast(`🔺 ${action.payload}`);
+                Toast.error(`${action.payload}`);
             });
     },
 });
