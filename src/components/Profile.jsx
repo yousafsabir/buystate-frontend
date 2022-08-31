@@ -28,9 +28,9 @@ const Profile = () => {
                 <a className="dropdown-item " href="blog-single.html">
                     Favourites
                 </a>
-                <a className="dropdown-item " href="agents-grid.html">
+                <Link to={"/listaproperty"} className="dropdown-item">
                     List a Property
-                </a>
+                </Link>
                 <a className="dropdown-item " href="agent-single.html">
                     My Listings
                 </a>

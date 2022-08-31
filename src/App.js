@@ -6,13 +6,14 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import ListAProperty from "./pages/ListAProperty";
 import Login from "./pages/Login";
 import Properties from "./pages/Properties";
+import PropertyDetail from "./pages/PropertyDetail";
 import Register from "./pages/Register";
 
 function App() {
     const isMobile = window.innerWidth <= 1024 ? true : false;
-    console.log(window.innerWidth);
     const [preloader, setPreloader] = useState(true);
     window.addEventListener("load", () => {
         setPreloader(false);
@@ -33,6 +34,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/properties" element={<Properties />} />
+                <Route path="/propertydetail" element={<PropertyDetail />} />
+                <Route path="/listaproperty" element={<ListAProperty />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
             </Routes>

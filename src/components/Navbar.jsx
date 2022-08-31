@@ -33,9 +33,9 @@ const Navbar = (props) => {
                     <span></span>
                     <span></span>
                 </button>
-                <a className="navbar-brand text-brand" href="index.html">
+                <Link to={"/"} className="navbar-brand text-brand">
                     Buy<span className="color-b">Estate</span>
-                </a>
+                </Link>
 
                 <div
                     className="navbar-collapse collapse justify-content-center align-items-center"

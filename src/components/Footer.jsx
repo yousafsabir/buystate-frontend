@@ -214,7 +214,8 @@ const Footer = () => {
                                 <br />
                                 in <span className="color-a">
                                     Hackathon
-                                </span> at <span className="color-a">SMIT</span>
+                                </span> at{" "}
+                                <span className="color-a">SMIT Labs</span>
                             </div>
                         </div>
                     </div>

@@ -88,8 +88,9 @@ const Auth = createSlice({
             state.loading = false;
             state.success = false;
             state.error = false;
+            state.editUser = false;
         },
-        setEditMode: (state) => {
+        setEditUser: (state) => {
             state.editUser = true;
         },
     },
@@ -136,6 +137,7 @@ const Auth = createSlice({
             .addCase(logout.fulfilled, (state) => {
                 state.loading = false;
                 state.success = true;
+                state.user = null;
                 toast("✔ Logged out successfully");
             })
             .addCase(logout.rejected, (state, action) => {

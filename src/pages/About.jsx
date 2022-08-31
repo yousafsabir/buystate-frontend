@@ -82,12 +82,10 @@ const About = () => {
                                     <div className="col-md-6 col-lg-5 section-md-t3">
                                         <div className="title-box-d">
                                             <h3 className="title-d">
-                                                Sed
                                                 <span className="color-d">
-                                                    porttitor
+                                                    Muhammad
                                                 </span>{" "}
-                                                lectus
-                                                <br /> nibh.
+                                                Yousaf
                                             </h3>
                                         </div>
                                         <p className="color-text-a">
