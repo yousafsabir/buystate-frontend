@@ -8,6 +8,7 @@ import {
     uploadBytes,
 } from "firebase/storage";
 import toast from "react-hot-toast";
+import Toast from "../../utils/Toast";
 
 // Api Url
 const apiUrl = "http://localhost:5000/api/properties/";
@@ -82,22 +83,17 @@ const Property = createSlice({
         builder
             .addCase(addProperty.pending, (state) => {
                 state.loading = true;
-                toast("🕓 Listing Property", {
-                    style: {
-                        borderRadius: "0",
-                        border: "2px solid #222",
-                    },
-                });
+                Toast.loading("Listing Property");
             })
             .addCase(addProperty.fulfilled, (state) => {
                 state.loading = false;
                 state.success = true;
-                toast("✔ Successfully listed your property");
+                Toast.success("Successfully listed your property");
             })
             .addCase(addProperty.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
-                toast(`🔺 ${action.payload}`);
+                Toast.error(`${action.payload}`);
             }),
 });
 
