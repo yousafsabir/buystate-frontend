@@ -1,12 +1,13 @@
 import toast from "react-hot-toast";
 
 const Toast = Object.freeze({
-    loading: (str, icon = "🕓") => {
-        toast(`${icon} ${str}`, {
+    loading: (str) => {
+        toast.loading(`${str}`, {
             style: {
                 borderRadius: "0",
                 border: "2px solid #222",
             },
+            id: "loadingtoast",
         });
     },
     success: (str, icon = "✔") => {
@@ -25,6 +26,7 @@ const Toast = Object.freeze({
             },
         });
     },
+    dismiss: () => toast.dismiss("loadingtoast"),
 });
 
 export default Toast;

@@ -81,6 +81,7 @@ const Property = createSlice({
     },
     extraReducers: (builder) =>
         builder
+            // Add Property
             .addCase(addProperty.pending, (state) => {
                 state.loading = true;
                 Toast.loading("Listing Property");
@@ -88,6 +89,7 @@ const Property = createSlice({
             .addCase(addProperty.fulfilled, (state) => {
                 state.loading = false;
                 state.success = true;
+                Toast.dismiss();
                 Toast.success("Successfully listed your property");
             })
             .addCase(addProperty.rejected, (state, action) => {

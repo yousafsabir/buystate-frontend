@@ -105,6 +105,7 @@ const Auth = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
+                Toast.dismiss();
                 state.user = action.payload;
                 Toast.success(`Welcome back ${state.user.fName}`, "😇");
             })
