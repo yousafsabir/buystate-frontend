@@ -9,31 +9,21 @@ const Profile = () => {
     const { user } = useSelector((state) => state.auth);
     return (
         <li className="nav-item dropdown">
-            <a
-                className="nav-link dropdown-toggle"
-                href="/"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-            >
-                Profile
-            </a>
+            <span className="nav-link dropdown-toggle">Profile</span>
             <div className="dropdown-menu">
-                <a className="dropdown-item " href="property-single.html">
+                <div className="dropdown-item ">
                     <BsPersonCircle style={{ fontSize: "1.35rem" }} />{" "}
                     {user?.fName}
-                </a>
-                <a className="dropdown-item " href="blog-single.html">
+                </div>
+                <Link to={"/favourites"} className="dropdown-item">
                     Favourites
-                </a>
+                </Link>
                 <Link to={"/listaproperty"} className="dropdown-item">
                     List a Property
                 </Link>
-                <a className="dropdown-item " href="agent-single.html">
+                <Link to={"/mylistings"} className="dropdown-item">
                     My Listings
-                </a>
+                </Link>
                 <button
                     className="btn btn-register"
                     style={{ marginInline: "1.125rem" }}

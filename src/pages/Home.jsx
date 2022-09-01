@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
 import Slider from "react-slick";
@@ -67,11 +68,11 @@ const Home = () => {
                                                     <br /> Olive Road Two
                                                 </h1>
                                                 <p className="intro-subtitle intro-price">
-                                                    <a href="/">
+                                                    <Link href="/">
                                                         <span className="price-a">
                                                             rent | $ 12.000
                                                         </span>
-                                                    </a>
+                                                    </Link>
                                                 </p>
                                             </div>
                                         </div>
