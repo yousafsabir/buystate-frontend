@@ -309,9 +309,9 @@ const Home = () => {
                                     imageSm: MiniTestimonial2,
                                     name: "Pablo & Emma",
                                 },
-                            ].map((doc) => {
+                            ].map((doc, i) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={i}>
                                         <div className="carousel-item-a swiper-slide">
                                             <div className="testimonials-box">
                                                 <div className="row">

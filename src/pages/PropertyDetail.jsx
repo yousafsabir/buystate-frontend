@@ -1,8 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import Slide1 from "../assets/img/slide-1.jpg";
 import Agent6 from "../assets/img/agent-6.jpg";
 
 const PropertyDetail = () => {
+    const propertyId = useLocation().state;
+    const [property, setProperty] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
+    useEffect(() => {
+        const unsub = async () => {
+            setLoading(true);
+            const res = await axios.post(apiUrl, {
+                find: { _id: propertyId },
+                sort: null,
+                limit: 1,
+            });
+            if (res.data.status === 200) {
+                res.data.properties.map((doc) => {
+                    return setProperty(doc);
+                });
+            } else {
+                setError(true);
+                setLoading(false);
+            }
+            setLoading(false);
+        };
+        return unsub;
+    }, [propertyId]);
+    if (loading || error) {
+        return (
+            <section className="section-property section-t8">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="title-wrap d-flex justify-content-between">
+                                <div className="title-box">
+                                    <h2 className="title-a">
+                                        Latest Properties
+                                    </h2>
+                                </div>
+                                <div className="title-link">
+                                    <Link to="/properties">
+                                        All Property
+                                        <span className="bi bi-chevron-right"></span>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div
+                            className="col-md-12 d-flex justify-content-center align-items-center"
+                            style={{ height: "300px" }}
+                        >
+                            {loading ? (
+                                <div className="loader"></div>
+                            ) : (
+                                <div>
+                                    <h5
+                                        className="text-center"
+                                        style={{ color: "#dc2626" }}
+                                    >
+                                        There seems to be an error while
+                                        fetching data from server <br /> You can
+                                        reload the page
+                                    </h5>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
     return (
         <main id="main">
             <section className="intro-single">
@@ -10,9 +84,11 @@ const PropertyDetail = () => {
                     <div className="row">
                         <div className="col-md-12 col-lg-8">
                             <div className="title-single-box">
-                                <h1 className="title-single">304 Blaster Up</h1>
+                                <h1 className="title-single">
+                                    {property.title}
+                                </h1>
                                 <span className="color-text-a">
-                                    Chicago, IL 606543
+                                    {property.location}
                                 </span>
                             </div>
                         </div>
@@ -23,18 +99,16 @@ const PropertyDetail = () => {
                             >
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item">
-                                        <a href="index.html">Home</a>
+                                        <Link to="/">Home</Link>
                                     </li>
                                     <li className="breadcrumb-item">
-                                        <a href="property-grid.html">
-                                            Properties
-                                        </a>
+                                        <Link to="/properties">Properties</Link>
                                     </li>
                                     <li
                                         className="breadcrumb-item active"
                                         aria-current="page"
                                     >
-                                        304 Blaster Up
+                                        {property.title}
                                     </li>
                                 </ol>
                             </nav>
@@ -48,7 +122,7 @@ const PropertyDetail = () => {
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8">
                             <img
-                                src={Slide1}
+                                src={property.image}
                                 style={{
                                     width: "100%",
                                     objectFit: "cover",
@@ -67,13 +141,23 @@ const PropertyDetail = () => {
                                     <div className="property-price d-flex justify-content-center foo">
                                         <div className="card-header-c d-flex">
                                             <div className="card-box-ico">
-                                                <span className="bi bi-cash">
-                                                    $
+                                                <span
+                                                    className="bi bi-cash"
+                                                    style={{
+                                                        fontSize: "2.8rem",
+                                                    }}
+                                                >
+                                                    Rs
                                                 </span>
                                             </div>
                                             <div className="card-title-c align-self-center">
-                                                <h5 className="title-c">
-                                                    15000
+                                                <h5
+                                                    className="title-c"
+                                                    style={{
+                                                        marginBottom: "-3px",
+                                                    }}
+                                                >
+                                                    {property.price}
                                                 </h5>
                                             </div>
                                         </div>
@@ -94,42 +178,52 @@ const PropertyDetail = () => {
                                                     <strong>
                                                         Property ID:
                                                     </strong>
-                                                    <span>1134</span>
+                                                    <span>{property._id}</span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Location:</strong>
-                                                    <span>
-                                                        Chicago, IL 606543
+                                                    <span
+                                                        style={{
+                                                            marginLeft: "20px",
+                                                        }}
+                                                    >
+                                                        {property.location}
                                                     </span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>
                                                         Property Type:
                                                     </strong>
-                                                    <span>House</span>
+                                                    <span>{property.type}</span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Status:</strong>
-                                                    <span>Sale</span>
+                                                    <span>
+                                                        {property.status}
+                                                    </span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Area:</strong>
                                                     <span>
-                                                        340m
+                                                        {property.area}m
                                                         <sup>2</sup>
                                                     </span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Beds:</strong>
-                                                    <span>4</span>
+                                                    <span>{property.beds}</span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Baths:</strong>
-                                                    <span>2</span>
+                                                    <span>
+                                                        {property.baths}
+                                                    </span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
                                                     <strong>Garage:</strong>
-                                                    <span>1</span>
+                                                    <span>
+                                                        {property.garages}
+                                                    </span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -147,23 +241,7 @@ const PropertyDetail = () => {
                                     </div>
                                     <div className="property-description">
                                         <p className="description color-text-a">
-                                            Vestibulum ante ipsum primis in
-                                            faucibus orci luctus et ultrices
-                                            posuere cubilia Curae; Donec velit
-                                            neque, auctor sit amet aliquam vel,
-                                            ullamcorper sit amet ligula. Cras
-                                            ultricies ligula sed magna dictum
-                                            porta. Curabitur aliquet quam id dui
-                                            posuere blandit. Mauris blandit
-                                            aliquet elit, eget tincidunt nibh
-                                            pulvinar quam id dui posuere
-                                            blandit. Curabitur arcu erat,
-                                            accumsan id imperdiet et, porttitor
-                                            at sem. Donec rutrum congue leo eget
-                                            malesuada. Quisque velit nisi,
-                                            pretium ut lacinia in, elementum id
-                                            enim. Donec sollicitudin molestie
-                                            malesuada.
+                                            {property.description}
                                         </p>
                                     </div>
                                     <div className="row section-t3">

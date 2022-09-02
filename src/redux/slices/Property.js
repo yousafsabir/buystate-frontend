@@ -33,7 +33,7 @@ export const addProperty = createAsyncThunk(
                 },
             };
             const res = await axios.post(
-                apiUrl,
+                apiUrl + "create",
                 {
                     ...args.data,
                     image,
