@@ -152,7 +152,7 @@ const Footer = () => {
                                         <Link to="/">Home</Link>
                                     </li>
                                     <li className="list-inline-item">
-                                        <Link to="/">About</Link>
+                                        <Link to="/about">About</Link>
                                     </li>
                                     <li className="list-inline-item">
                                         <Link to="/properties">Properties</Link>
@@ -161,7 +161,7 @@ const Footer = () => {
                                         <Link to="/blog">Blog</Link>
                                     </li>
                                     <li className="list-inline-item">
-                                        <Link href="/contact">Contact</Link>
+                                        <Link to="/contact">Contact</Link>
                                     </li>
                                 </ul>
                             </nav>

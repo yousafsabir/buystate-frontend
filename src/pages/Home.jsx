@@ -68,7 +68,7 @@ const Home = () => {
                                                     <br /> Olive Road Two
                                                 </h1>
                                                 <p className="intro-subtitle intro-price">
-                                                    <Link href="/">
+                                                    <Link to="/">
                                                         <span className="price-a">
                                                             rent | $ 12.000
                                                         </span>
