@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import Slide1 from "../assets/img/slide-1.jpg";
 import Agent6 from "../assets/img/agent-6.jpg";
 
 const PropertyDetail = () => {

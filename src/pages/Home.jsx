@@ -12,15 +12,6 @@ import Slide3 from "../assets/img/slide-3.jpg";
 import LatestPropetyCarousel from "../components/LatestPropetyCarousel";
 
 const Home = () => {
-    // activeOffset is related to window.scrollY
-    const [activeOffset, setActiveOffset] = useState(false);
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 100) {
-            setActiveOffset(true);
-        } else {
-            setActiveOffset(false);
-        }
-    });
     return (
         <div>
             <div id="for-backtotop"></div>
