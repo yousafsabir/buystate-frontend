@@ -288,10 +288,10 @@ const Home = () => {
                                         </h2>
                                     </div>
                                     <div className="title-link">
-                                        <a href="property-grid.html">
+                                        <Link to="/properties">
                                             All Property
                                             <span className="bi bi-chevron-right"></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

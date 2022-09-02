@@ -40,7 +40,7 @@ const Login = () => {
         }
     }, [loading]);
     const submit = () => {
-        dispatch(login({ idType, userId, password }));
+        dispatch(login({ id: { [idType]: userId }, password }));
     };
     return (
         <>
