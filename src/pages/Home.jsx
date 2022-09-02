@@ -1,14 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
-import Slider from "react-slick";
-import Navbar from "../components/Navbar";
-import BackToTop from "../components/BackToTop";
-import Property6 from "../assets/img/property-6.jpg";
-import Property3 from "../assets/img/property-3.jpg";
-import Property7 from "../assets/img/property-7.jpg";
-import Property10 from "../assets/img/property-10.jpg";
 import Testimonial1 from "../assets/img/testimonial-1.jpg";
 import Testimonial2 from "../assets/img/testimonial-2.jpg";
 import MiniTestimonial1 from "../assets/img/mini-testimonial-1.jpg";
@@ -16,7 +9,7 @@ import MiniTestimonial2 from "../assets/img/mini-testimonial-2.jpg";
 import Slide1 from "../assets/img/slide-1.jpg";
 import Slide2 from "../assets/img/slide-2.jpg";
 import Slide3 from "../assets/img/slide-3.jpg";
-import Footer from "../components/Footer";
+import LatestPropetyCarousel from "../components/LatestPropetyCarousel";
 
 const Home = () => {
     // activeOffset is related to window.scrollY
@@ -277,339 +270,11 @@ const Home = () => {
                 {/* ---------- */}
                 {/* Properties */}
                 {/* ---------- */}
-                <section className="section-property section-t8">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="title-wrap d-flex justify-content-between">
-                                    <div className="title-box">
-                                        <h2 className="title-a">
-                                            Latest Properties
-                                        </h2>
-                                    </div>
-                                    <div className="title-link">
-                                        <Link to="/properties">
-                                            All Property
-                                            <span className="bi bi-chevron-right"></span>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <LatestPropetyCarousel />
 
-                        {/* -------- */}
-                        {/* Carousel */}
-                        {/* -------- */}
-
-                        <Swiper
-                            className="swiper"
-                            modules={[Pagination, Autoplay, Navigation]}
-                            speed={600}
-                            loop={true}
-                            autoplay={{
-                                delay: 2000,
-                                disableOnInteraction: true,
-                            }}
-                            slidesPerView="auto"
-                            breakpoints={{
-                                320: {
-                                    slidesPerView: 1,
-                                    spaceBetween: 20,
-                                },
-
-                                1200: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 20,
-                                },
-                            }}
-                        >
-                            <SwiperSlide>
-                                <div className="carousel-item-b swiper-slide">
-                                    <div className="card-box-a card-shadow">
-                                        <div className="img-box-a">
-                                            <img
-                                                src={Property6}
-                                                alt=""
-                                                className="img-a img-fluid"
-                                            />
-                                        </div>
-                                        <div className="card-overlay">
-                                            <div className="card-overlay-a-content">
-                                                <div className="card-header-a">
-                                                    <h2 className="card-title-a">
-                                                        <a href="property-single.html">
-                                                            206 Mount
-                                                            <br /> Olive Road
-                                                            Two
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div className="card-body-a">
-                                                    <div className="price-box d-flex">
-                                                        <span className="price-a">
-                                                            rent | $ 12.000
-                                                        </span>
-                                                    </div>
-                                                    <a
-                                                        href="/"
-                                                        className="link-a"
-                                                    >
-                                                        Click here to view
-                                                        <span className="bi bi-chevron-right"></span>
-                                                    </a>
-                                                </div>
-                                                <div className="card-footer-a">
-                                                    <ul className="card-info d-flex justify-content-around">
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Area
-                                                            </h4>
-                                                            <span>
-                                                                340m
-                                                                <sup>2</sup>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Beds
-                                                            </h4>
-                                                            <span>2</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Baths
-                                                            </h4>
-                                                            <span>4</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Garages
-                                                            </h4>
-                                                            <span>1</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="carousel-item-b swiper-slide">
-                                    <div className="card-box-a card-shadow">
-                                        <div className="img-box-a">
-                                            <img
-                                                src={Property3}
-                                                alt=""
-                                                className="img-a img-fluid"
-                                            />
-                                        </div>
-                                        <div className="card-overlay">
-                                            <div className="card-overlay-a-content">
-                                                <div className="card-header-a">
-                                                    <h2 className="card-title-a">
-                                                        <a href="property-single.html">
-                                                            157 West
-                                                            <br /> Central Park
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div className="card-body-a">
-                                                    <div className="price-box d-flex">
-                                                        <span className="price-a">
-                                                            rent | $ 12.000
-                                                        </span>
-                                                    </div>
-                                                    <a
-                                                        href="property-single.html"
-                                                        className="link-a"
-                                                    >
-                                                        Click here to view
-                                                        <span className="bi bi-chevron-right"></span>
-                                                    </a>
-                                                </div>
-                                                <div className="card-footer-a">
-                                                    <ul className="card-info d-flex justify-content-around">
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Area
-                                                            </h4>
-                                                            <span>
-                                                                340m
-                                                                <sup>2</sup>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Beds
-                                                            </h4>
-                                                            <span>2</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Baths
-                                                            </h4>
-                                                            <span>4</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Garages
-                                                            </h4>
-                                                            <span>1</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="carousel-item-b swiper-slide">
-                                    <div className="card-box-a card-shadow">
-                                        <div className="img-box-a">
-                                            <img
-                                                src={Property7}
-                                                alt=""
-                                                className="img-a img-fluid"
-                                            />
-                                        </div>
-                                        <div className="card-overlay">
-                                            <div className="card-overlay-a-content">
-                                                <div className="card-header-a">
-                                                    <h2 className="card-title-a">
-                                                        <a href="property-single.html">
-                                                            245 Azabu
-                                                            <br /> Nishi Park
-                                                            let
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div className="card-body-a">
-                                                    <div className="price-box d-flex">
-                                                        <span className="price-a">
-                                                            rent | $ 12.000
-                                                        </span>
-                                                    </div>
-                                                    <a
-                                                        href="property-single.html"
-                                                        className="link-a"
-                                                    >
-                                                        Click here to view
-                                                        <span className="bi bi-chevron-right"></span>
-                                                    </a>
-                                                </div>
-                                                <div className="card-footer-a">
-                                                    <ul className="card-info d-flex justify-content-around">
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Area
-                                                            </h4>
-                                                            <span>
-                                                                340m
-                                                                <sup>2</sup>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Beds
-                                                            </h4>
-                                                            <span>2</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Baths
-                                                            </h4>
-                                                            <span>4</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Garages
-                                                            </h4>
-                                                            <span>1</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="carousel-item-b swiper-slide">
-                                    <div className="card-box-a card-shadow">
-                                        <div className="img-box-a">
-                                            <img
-                                                src={Property10}
-                                                alt=""
-                                                className="img-a img-fluid"
-                                            />
-                                        </div>
-                                        <div className="card-overlay">
-                                            <div className="card-overlay-a-content">
-                                                <div className="card-header-a">
-                                                    <h2 className="card-title-a">
-                                                        <a href="property-single.html">
-                                                            204 Montal
-                                                            <br /> South Bela
-                                                            Two
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div className="card-body-a">
-                                                    <div className="price-box d-flex">
-                                                        <span className="price-a">
-                                                            rent | $ 12.000
-                                                        </span>
-                                                    </div>
-                                                    <a
-                                                        href="property-single.html"
-                                                        className="link-a"
-                                                    >
-                                                        Click here to view
-                                                        <span className="bi bi-chevron-right"></span>
-                                                    </a>
-                                                </div>
-                                                <div className="card-footer-a">
-                                                    <ul className="card-info d-flex justify-content-around">
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Area
-                                                            </h4>
-                                                            <span>
-                                                                340m
-                                                                <sup>2</sup>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Beds
-                                                            </h4>
-                                                            <span>2</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Baths
-                                                            </h4>
-                                                            <span>4</span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Garages
-                                                            </h4>
-                                                            <span>1</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
-                        <div className="propery-carousel-pagination carousel-pagination"></div>
-                    </div>
-                </section>
+                {/* ------------ */}
+                {/* Testimonials */}
+                {/* ------------ */}
                 <section className="section-testimonials section-t8 nav-arrow-a">
                     <div className="container">
                         <div className="row">
@@ -631,94 +296,64 @@ const Home = () => {
                             pagination={{ type: "bullets", clickable: true }}
                             slidesPerView="auto"
                         >
-                            <SwiperSlide>
-                                <div className="carousel-item-a swiper-slide">
-                                    <div className="testimonials-box">
-                                        <div className="row">
-                                            <div className="col-sm-12 col-md-6">
-                                                <div className="testimonial-img">
-                                                    <img
-                                                        src={Testimonial1}
-                                                        alt=""
-                                                        className="img-fluid"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-12 col-md-6">
-                                                <div className="testimonial-ico">
-                                                    <i className="bi bi-chat-quote-fill"></i>
-                                                </div>
-                                                <div className="testimonials-content">
-                                                    <p className="testimonial-text">
-                                                        Lorem ipsum dolor sit
-                                                        amet, consectetur
-                                                        adipisicing elit. Omnis,
-                                                        cupiditate ea nam
-                                                        praesentium debitis hic
-                                                        ber quibusdam
-                                                        voluptatibus officia
-                                                        expedita corpori.
-                                                    </p>
-                                                </div>
-                                                <div className="testimonial-author-box">
-                                                    <img
-                                                        src={MiniTestimonial1}
-                                                        alt=""
-                                                        className="testimonial-avatar"
-                                                    />
-                                                    <h5 className="testimonial-author">
-                                                        Albert & Erika
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="carousel-item-a swiper-slide">
-                                    <div className="testimonials-box">
-                                        <div className="row">
-                                            <div className="col-sm-12 col-md-6">
-                                                <div className="testimonial-img">
-                                                    <img
-                                                        src={Testimonial2}
-                                                        alt=""
-                                                        className="img-fluid"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-12 col-md-6">
-                                                <div className="testimonial-ico">
-                                                    <i className="bi bi-chat-quote-fill"></i>
-                                                </div>
-                                                <div className="testimonials-content">
-                                                    <p className="testimonial-text">
-                                                        Lorem ipsum dolor sit
-                                                        amet, consectetur
-                                                        adipisicing elit. Omnis,
-                                                        cupiditate ea nam
-                                                        praesentium debitis hic
-                                                        ber quibusdam
-                                                        voluptatibus officia
-                                                        expedita corpori.
-                                                    </p>
-                                                </div>
-                                                <div className="testimonial-author-box">
-                                                    <img
-                                                        src={MiniTestimonial2}
-                                                        alt=""
-                                                        className="testimonial-avatar"
-                                                    />
-                                                    <h5 className="testimonial-author">
-                                                        Pablo & Emma
-                                                    </h5>
+                            {[
+                                {
+                                    imageLg: Testimonial1,
+                                    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda officia distinctio, repellendus, corrupti perferendis soluta in quo accusantium voluptatem odit quas minima doloribus commodi voluptate. Voluptas veritatis adipisci similique. Ipsum necessitatibus molestias similique ut dolores minus harum aspernatur natus laborum?",
+                                    imageSm: MiniTestimonial1,
+                                    name: "Albert & Erika",
+                                },
+                                {
+                                    imageLg: Testimonial2,
+                                    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda officia distinctio, repellendus, corrupti perferendis soluta in quo accusantium voluptatem odit quas minima doloribus commodi voluptate. Voluptas veritatis adipisci similique. Ipsum necessitatibus molestias similique ut dolores minus harum aspernatur natus laborum?",
+                                    imageSm: MiniTestimonial2,
+                                    name: "Pablo & Emma",
+                                },
+                            ].map((doc) => {
+                                return (
+                                    <SwiperSlide>
+                                        <div className="carousel-item-a swiper-slide">
+                                            <div className="testimonials-box">
+                                                <div className="row">
+                                                    <div className="col-sm-12 col-md-6">
+                                                        <div className="testimonial-img">
+                                                            <img
+                                                                src={
+                                                                    doc.imageLg
+                                                                }
+                                                                alt=""
+                                                                className="img-fluid"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-12 col-md-6">
+                                                        <div className="testimonial-ico">
+                                                            <i className="bi bi-chat-quote-fill"></i>
+                                                        </div>
+                                                        <div className="testimonials-content">
+                                                            <p className="testimonial-text">
+                                                                {doc.text}
+                                                            </p>
+                                                        </div>
+                                                        <div className="testimonial-author-box">
+                                                            <img
+                                                                src={
+                                                                    doc.imageSm
+                                                                }
+                                                                alt=""
+                                                                className="testimonial-avatar"
+                                                            />
+                                                            <h5 className="testimonial-author">
+                                                                {doc.name}
+                                                            </h5>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                    </SwiperSlide>
+                                );
+                            })}
                         </Swiper>
                     </div>
                 </section>
