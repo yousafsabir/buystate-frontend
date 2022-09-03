@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PropertyCard = ({
+    propertyId,
     img,
     title,
     status,
@@ -11,6 +12,12 @@ const PropertyCard = ({
     baths,
     garages,
 }) => {
+    const navigate = useNavigate();
+
+    // Redirect to property detail
+    const redirect = (id) => {
+        navigate("/propertydetail", { state: id });
+    };
     return (
         <div className="card-box-a card-shadow">
             <div className="img-box-a">
@@ -29,10 +36,13 @@ const PropertyCard = ({
                                 {status} | Rs {price}
                             </span>
                         </div>
-                        <Link to={"/propertydetail"} className="link-a">
+                        <span
+                            onClick={() => redirect(propertyId)}
+                            className="link-a"
+                        >
                             Click here to view
                             <span className="bi bi-chevron-right"></span>
-                        </Link>
+                        </span>
                     </div>
                     <div className="card-footer-a">
                         <ul className="card-info d-flex justify-content-around">

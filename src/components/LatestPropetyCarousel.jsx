@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
+import PropertyCard from "./PropertyCard";
 
 const LatestPropetyCarousel = () => {
     const navigate = useNavigate();
@@ -29,11 +30,8 @@ const LatestPropetyCarousel = () => {
         };
         return unsub;
     }, []);
+    console.log(properties);
 
-    // Redirect to property detail
-    const redirect = (id) => {
-        navigate("/propertydetail", { state: id });
-    };
     if (loading || error) {
         return (
             <section className="section-property section-t8">
@@ -129,84 +127,17 @@ const LatestPropetyCarousel = () => {
                         return (
                             <SwiperSlide key={property._id}>
                                 <div className="carousel-item-b swiper-slide">
-                                    <div className="card-box-a card-shadow">
-                                        <div className="img-box-a">
-                                            <img
-                                                src={property.image}
-                                                alt=""
-                                                className="img-a img-fluid"
-                                            />
-                                        </div>
-                                        <div className="card-overlay">
-                                            <div className="card-overlay-a-content">
-                                                <div className="card-header-a">
-                                                    <h2 className="card-title-a">
-                                                        <a href="property-single.html">
-                                                            {property.title}
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div className="card-body-a">
-                                                    <div className="price-box d-flex">
-                                                        <span className="price-a">
-                                                            {property.status} |
-                                                            Rs {property.price}
-                                                        </span>
-                                                    </div>
-                                                    <span
-                                                        onClick={() =>
-                                                            redirect(
-                                                                property._id
-                                                            )
-                                                        }
-                                                        className="link-a"
-                                                    >
-                                                        Click here to view
-                                                        <span className="bi bi-chevron-right"></span>
-                                                    </span>
-                                                </div>
-                                                <div className="card-footer-a">
-                                                    <ul className="card-info d-flex justify-content-around">
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Area
-                                                            </h4>
-                                                            <span>
-                                                                {property.area}m
-                                                                <sup>2</sup>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Beds
-                                                            </h4>
-                                                            <span>
-                                                                {property.beds}
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Baths
-                                                            </h4>
-                                                            <span>
-                                                                {property.baths}
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <h4 className="card-info-title">
-                                                                Garages
-                                                            </h4>
-                                                            <span>
-                                                                {
-                                                                    property.garages
-                                                                }
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <PropertyCard
+                                        propertyId={property._id}
+                                        img={property.image}
+                                        title={property.title}
+                                        status={property.status}
+                                        price={property.price}
+                                        area={property.area}
+                                        baths={property.baths}
+                                        beds={property.beds}
+                                        garages={property.garages}
+                                    />
                                 </div>
                             </SwiperSlide>
                         );
