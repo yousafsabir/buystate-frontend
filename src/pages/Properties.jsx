@@ -9,7 +9,6 @@ const Properties = () => {
     const [error, setError] = useState(false);
 
     const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
-    console.log(properties);
     useEffect(() => {
         const unsub = async () => {
             try {
@@ -34,6 +33,7 @@ const Properties = () => {
                 console.log("error", e);
             }
         };
+        unsub();
         return unsub;
     }, []);
     if (loading || error) {

@@ -27,9 +27,9 @@ const LatestPropetyCarousel = () => {
             }
             setLoading(false);
         };
+        unsub();
         return unsub;
     }, []);
-    console.log(properties);
 
     if (loading || error) {
         return (
