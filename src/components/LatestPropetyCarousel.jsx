@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
 import PropertyCard from "./PropertyCard";
 
 const LatestPropetyCarousel = () => {
-    const navigate = useNavigate();
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -46,7 +45,7 @@ const LatestPropetyCarousel = () => {
                                 </div>
                                 <div className="title-link">
                                     <Link to="/properties">
-                                        All Property
+                                        All Properties
                                         <span className="bi bi-chevron-right"></span>
                                     </Link>
                                 </div>

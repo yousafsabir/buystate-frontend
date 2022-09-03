@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import Property1 from "../assets/img/property-1.jpg";
-import Property3 from "../assets/img/property-3.jpg";
-import Property6 from "../assets/img/property-6.jpg";
-import Property7 from "../assets/img/property-7.jpg";
-import Property8 from "../assets/img/property-8.jpg";
-import Property10 from "../assets/img/property-10.jpg";
 import PropertyCard from "../components/PropertyCard";
 
 const Properties = () => {
-    const navigate = useNavigate();
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -22,7 +15,7 @@ const Properties = () => {
             const res = await axios.post(apiUrl, {
                 find: null,
                 sort: "descending",
-                limit: 4,
+                limit: null,
             });
             if (res.data.status === 200) {
                 setProperties(res.data.properties);
@@ -34,11 +27,6 @@ const Properties = () => {
         };
         return unsub;
     }, []);
-
-    // Redirect to property detail
-    const redirect = (id) => {
-        navigate("/propertydetail", { state: id });
-    };
     if (loading || error) {
         return (
             <section className="intro-single">
@@ -151,74 +139,7 @@ const Properties = () => {
                                 </form>
                             </div>
                         </div>
-                        {[
-                            {
-                                _id: "abc",
-                                img: Property1,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                            {
-                                _id: "abc",
-                                img: Property3,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                            {
-                                _id: "abc",
-                                img: Property6,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                            {
-                                _id: "abc",
-                                img: Property7,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                            {
-                                _id: "abc",
-                                img: Property8,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                            {
-                                _id: "abc",
-                                image: Property10,
-                                title: "204 Mount Olive Road Two",
-                                status: "sale",
-                                price: 15000,
-                                area: 350,
-                                baths: 5,
-                                beds: 4,
-                                garages: 1,
-                            },
-                        ].map((property) => {
+                        {properties?.map((property) => {
                             return (
                                 <div className="col-md-4">
                                     <PropertyCard
