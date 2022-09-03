@@ -12,19 +12,27 @@ const Properties = () => {
     console.log(process.env.REACT_APP_API_URL);
     useEffect(() => {
         const unsub = async () => {
-            setLoading(true);
-            const res = await axios.post(apiUrl, {
-                find: null,
-                sort: "descending",
-                limit: null,
-            });
-            if (res.data.status === 200) {
-                setProperties(res.data.properties);
-            } else {
-                setError(true);
+            try {
+                console.log("before loading");
+                setLoading(true);
+                const res = await axios.post(apiUrl, {
+                    find: null,
+                    sort: "descending",
+                    limit: null,
+                });
+                console.log("after fetching");
+                console.log(res.data);
+                if (res.data.status === 200) {
+                    setProperties(res.data.properties);
+                } else {
+                    setError(true);
+                    setLoading(false);
+                }
                 setLoading(false);
+            } catch (e) {
+                console.log("message", e.message);
+                console.log("error", e);
             }
-            setLoading(false);
         };
         return unsub;
     }, []);
