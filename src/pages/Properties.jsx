@@ -5,37 +5,42 @@ import PropertyCard from "../components/PropertyCard";
 
 const Properties = () => {
     const [properties, setProperties] = useState([]);
+    const [pagination, setPagination] = useState({});
+    const [Page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
+    // const apiUrl = process.env.REACT_APP_API_URL + "api/properties/";
+    const apiUrl = "http://localhost:5000/api/properties/get";
     useEffect(() => {
         const unsub = async () => {
             try {
-                console.log("before loading");
                 setLoading(true);
-                const res = await axios.post(apiUrl, {
-                    find: null,
-                    sort: "descending",
-                    limit: null,
-                });
-                console.log("after fetching");
-                console.log(res.data);
+                const res = await axios.post(
+                    apiUrl,
+                    {
+                        sort: "descending",
+                        page: Page,
+                        limit: 3,
+                    },
+                    { contentType: "applicationJson" }
+                );
                 if (res.data.status === 200) {
                     setProperties(res.data.properties);
-                } else {
-                    setError(true);
+                    setPagination(res.data.pagination);
+                    // setPage(res.data.pagination);
                     setLoading(false);
                 }
-                setLoading(false);
             } catch (e) {
+                setError(true);
+                setLoading(false);
                 console.log("message", e.message);
                 console.log("error", e);
             }
         };
         unsub();
         return unsub;
-    }, []);
+    }, [Page]);
     if (loading || error) {
         return (
             <section className="intro-single">
@@ -140,7 +145,7 @@ const Properties = () => {
                             <div className="grid-option">
                                 <form>
                                     <select className="custom-select">
-                                        <option selected>All</option>
+                                        <option defaultChecked>All</option>
                                         <option value="1">New to Old</option>
                                         <option value="2">For Rent</option>
                                         <option value="3">For Sale</option>
@@ -150,7 +155,7 @@ const Properties = () => {
                         </div>
                         {properties?.map((property) => {
                             return (
-                                <div className="col-md-4">
+                                <div className="col-md-4" key={property._id}>
                                     <PropertyCard
                                         propertyId={property._id}
                                         img={property.image}
@@ -166,38 +171,80 @@ const Properties = () => {
                             );
                         })}
                     </div>
+
+                    {/* ---------- */}
+                    {/* Pagination */}
+                    {/* ---------- */}
                     <div className="row">
                         <div className="col-sm-12">
                             <nav className="pagination-a">
                                 <ul className="pagination justify-content-end">
-                                    <li className="page-item disabled">
-                                        <a
+                                    {/* Previous */}
+                                    <li className="page-item">
+                                        <button
                                             className="page-link"
-                                            href="#"
-                                            tabindex="-1"
+                                            style={{
+                                                border: "none",
+                                                background: "transparent",
+                                                cursor: pagination.previous
+                                                    ? "pointer"
+                                                    : "not-allowed",
+                                                color:
+                                                    !pagination.previous &&
+                                                    "#666",
+                                            }}
+                                            tabIndex="-1"
                                         >
                                             <span className="bi bi-chevron-left"></span>
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li className="page-item">
-                                        <a className="page-link" href="#">
-                                            1
-                                        </a>
-                                    </li>
+                                    {pagination.previous && (
+                                        <li className="page-item">
+                                            <span
+                                                className="page-link"
+                                                onClick={() =>
+                                                    setPage(pagination.previous)
+                                                }
+                                            >
+                                                {pagination.previous}
+                                            </span>
+                                        </li>
+                                    )}
+                                    {/* Current */}
                                     <li className="page-item active">
-                                        <a className="page-link" href="#">
-                                            2
-                                        </a>
+                                        <span className="page-link">
+                                            {pagination.page}
+                                        </span>
                                     </li>
-                                    <li className="page-item">
-                                        <a className="page-link" href="#">
-                                            3
-                                        </a>
-                                    </li>
+                                    {/* Next */}
+                                    {pagination.next && (
+                                        <li className="page-item">
+                                            <span
+                                                className="page-link"
+                                                onClick={() =>
+                                                    setPage(pagination.next)
+                                                }
+                                            >
+                                                {pagination.next}
+                                            </span>
+                                        </li>
+                                    )}
                                     <li className="page-item next">
-                                        <a className="page-link" href="#">
+                                        <button
+                                            className="page-link"
+                                            style={{
+                                                border: "none",
+                                                background: "transparent",
+                                                cursor: pagination.next
+                                                    ? "pointer"
+                                                    : "not-allowed",
+                                                color:
+                                                    !pagination.next && "#666",
+                                            }}
+                                            tabIndex="-1"
+                                        >
                                             <span className="bi bi-chevron-right"></span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </nav>

@@ -13,19 +13,22 @@ const LatestPropetyCarousel = () => {
     const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
     useEffect(() => {
         const unsub = async () => {
-            setLoading(true);
-            const res = await axios.post(apiUrl, {
-                find: null,
-                sort: "descending",
-                limit: 4,
-            });
-            if (res.data.status === 200) {
-                setProperties(res.data.properties);
-            } else {
+            try {
+                setLoading(true);
+                const res = await axios.post(apiUrl, {
+                    sort: "descending",
+                    limit: 4,
+                });
+                if (res.data.status === 200) {
+                    setProperties(res.data.properties);
+                    setLoading(false);
+                }
+            } catch (e) {
                 setError(true);
                 setLoading(false);
+                console.log("message", e.message);
+                console.log("error", e);
             }
-            setLoading(false);
         };
         unsub();
         return unsub;
