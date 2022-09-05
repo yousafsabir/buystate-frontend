@@ -10,7 +10,7 @@ const Properties = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/";
+    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
     useEffect(() => {
         const unsub = async () => {
             try {
