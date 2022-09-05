@@ -20,7 +20,7 @@ const Properties = () => {
                     {
                         sort: "descending",
                         page: Page,
-                        limit: 3,
+                        limit: 9,
                     },
                     { contentType: "applicationJson" }
                 );
