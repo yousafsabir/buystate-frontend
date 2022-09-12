@@ -113,6 +113,7 @@ const Auth = createSlice({
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
+                Toast.dismiss();
                 Toast.error(`${action.payload}`);
             })
             // For Register
@@ -130,6 +131,7 @@ const Auth = createSlice({
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
+                Toast.dismiss();
                 Toast.error(`${action.payload}`);
             })
             // For Logout
@@ -146,6 +148,7 @@ const Auth = createSlice({
                 state.loading = false;
                 state.error = true;
                 state.message = action.payload;
+                Toast.dismiss();
                 Toast.error(`${action.payload}`);
             });
     },

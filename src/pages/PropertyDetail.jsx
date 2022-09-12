@@ -28,6 +28,7 @@ const PropertyDetail = () => {
             }
             setLoading(false);
         };
+        unsub();
         return unsub;
     }, [propertyId]);
     if (loading || error) {
