@@ -53,7 +53,7 @@ const Register = () => {
                 </h2>
                 <form
                     role="form"
-                    class="php-email-form"
+                    className="php-email-form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         submit();
@@ -62,9 +62,9 @@ const Register = () => {
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <div class="row px-3">
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                            <div className="row px-3">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             type="text"
                                             name="fName"
@@ -76,14 +76,14 @@ const Register = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="First Name"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             name="lName"
                                             value={lName}
@@ -95,14 +95,14 @@ const Register = () => {
                                                 }))
                                             }
                                             type="text"
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Last Name"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             type="text"
                                             name="userName"
@@ -114,14 +114,14 @@ const Register = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Username"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             name="phone"
                                             value={phone}
@@ -133,14 +133,14 @@ const Register = () => {
                                                 }))
                                             }
                                             type="text"
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Your Phone Number"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             type="email"
                                             name="email"
@@ -152,14 +152,14 @@ const Register = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Your Email"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             name="password"
                                             type="password"
@@ -171,22 +171,22 @@ const Register = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Set Password"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12 d-flex justify-content-center mb-3">
+                                <div className="col-md-12 d-flex justify-content-center mb-3">
                                     <button
                                         type="submit"
-                                        class="btn-submit-form"
+                                        className="btn-submit-form"
                                         disabled={!isValid}
                                     >
                                         {editMode ? "Update" : "Register"}
                                     </button>
                                 </div>
-                                <div class="col-md-12 text-center color-text-a">
+                                <div className="col-md-12 text-center color-text-a">
                                     <span>
                                         Already a member?{" "}
                                         <Link to={"/login"} className="color-a">

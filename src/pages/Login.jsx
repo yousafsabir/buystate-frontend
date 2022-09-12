@@ -40,18 +40,21 @@ const Login = () => {
         }
     }, [loading]);
     const submit = () => {
-        dispatch(login({ id: { [idType]: userId }, password }));
+        dispatch(login({ id: userId, password }));
     };
     return (
         <>
             <div style={{ height: "200px" }}></div>
             <div className="container">
-                <h2 className="text-center mb-5" style={{ fontSize: "3rem" }}>
+                <h2
+                    className="text-center"
+                    style={{ fontSize: "3rem", marginBottom: "3rem" }}
+                >
                     Login
                 </h2>
                 <form
                     role="form"
-                    class="php-email-form"
+                    className="php-email-form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         submit();
@@ -60,61 +63,33 @@ const Login = () => {
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <div class="row px-3">
-                                <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label
-                                            className="pb-2"
-                                            htmlFor="idType"
-                                        >
-                                            Login With
-                                        </label>
-                                        <select
-                                            className="form-control form-select form-control-a"
-                                            id="idType"
-                                            onChange={(e) =>
-                                                setIdType(e.target.value)
-                                            }
-                                            required
-                                        >
-                                            <option
-                                                value={""}
-                                                className="text-a"
-                                            >
-                                                select an option
-                                            </option>
-                                            <option value={"userName"}>
-                                                username
-                                            </option>
-                                            <option value={"email"}>
-                                                email
-                                            </option>
-                                            <option value={"phone"}>
-                                                phone
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                            <div className="row px-3">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group  login-input">
                                         <input
                                             type="text"
                                             name="userId"
-                                            class="form-control form-control-lg form-control-a"
-                                            placeholder={text}
+                                            className="form-control form-control-lg form-control-a login-input-field"
+                                            placeholder="Enter email, phone, username"
                                             required
                                             onChange={(e) =>
                                                 setUserId(e.target.value)
                                             }
                                         />
+                                        <div className="login-tooltip">
+                                            <p>email like : johndoe@mail.com</p>
+                                            <p>username like : johndoe</p>
+                                            <p>phone like : 03451231212</p>
+                                            <div className="tooltip-pointer"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <input
                                             name="password"
                                             type="password"
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="Enter Password"
                                             required
                                             onChange={(e) =>
@@ -123,16 +98,16 @@ const Login = () => {
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12 d-flex justify-content-center mb-3">
+                                <div className="col-md-12 d-flex justify-content-center mb-3">
                                     <button
                                         type="submit"
-                                        class="btn-submit-form"
+                                        className="btn-submit-form"
                                         // disabled={!isValid}
                                     >
                                         Login
                                     </button>
                                 </div>
-                                <div class="col-md-12 text-center color-text-a">
+                                <div className="col-md-12 text-center color-text-a">
                                     <span>
                                         New Here?{" "}
                                         <Link

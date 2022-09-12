@@ -17,10 +17,13 @@ const apiUrl = process.env.REACT_APP_API_URL + "api/users/";
 export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
     try {
         const res = await axios.post(apiUrl + "login", args);
-        if (res.data) {
+        if (res.data.status === 200) {
             localStorage.setItem("user", JSON.stringify(res.data.user));
             return res.data.user;
+        } else {
+            return thunkApi.rejectWithValue(res.data.message);
         }
+        console.log(res);
     } catch (error) {
         console.log("complete error", error);
         console.log("error message:", message);

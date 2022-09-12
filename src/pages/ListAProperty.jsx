@@ -87,7 +87,7 @@ const ListAProperty = () => {
                 </h2>
                 <form
                     role="form"
-                    class="php-email-form"
+                    className="php-email-form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         submit();
@@ -96,9 +96,9 @@ const ListAProperty = () => {
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <div class="row px-3">
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                            <div className="row px-3">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label htmlFor="title" className="pb-2">
                                             Title
                                         </label>
@@ -114,14 +114,14 @@ const ListAProperty = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. Beautiful House"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label
                                             htmlFor="location"
                                             className="pb-2"
@@ -140,14 +140,14 @@ const ListAProperty = () => {
                                                 }))
                                             }
                                             type="text"
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. West Canal Road, Abdullahpur ..."
                                             required
                                         />
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <label
                                             htmlFor="description"
                                             className="mb-2"
@@ -157,7 +157,7 @@ const ListAProperty = () => {
                                         <textarea
                                             name="description"
                                             id="description"
-                                            class="form-control"
+                                            className="form-control"
                                             value={description}
                                             onChange={(e) =>
                                                 setForm((prev) => ({
@@ -173,7 +173,7 @@ const ListAProperty = () => {
                                         ></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
+                                <div className="col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <label
                                             className="pb-2"
@@ -209,7 +209,7 @@ const ListAProperty = () => {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
+                                <div className="col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <label className="pb-2" htmlFor="type">
                                             Property Type
@@ -254,8 +254,8 @@ const ListAProperty = () => {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label className="pb-2" htmlFor="area">
                                             Area(m<sup>2</sup>)
                                         </label>
@@ -270,14 +270,14 @@ const ListAProperty = () => {
                                                 }))
                                             }
                                             type="number"
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 400"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label className="pb-2" htmlFor="beds">
                                             No. of Beds
                                         </label>
@@ -292,14 +292,14 @@ const ListAProperty = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 4"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label className="pb-2" htmlFor="baths">
                                             No. of Baths
                                         </label>
@@ -314,14 +314,14 @@ const ListAProperty = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 4"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label
                                             className="pb-2"
                                             htmlFor="garages"
@@ -339,14 +339,14 @@ const ListAProperty = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 1"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label className="pb-2" htmlFor="price">
                                             Price (Rs)
                                         </label>
@@ -361,14 +361,14 @@ const ListAProperty = () => {
                                                         e.target.value,
                                                 }))
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 2000000"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
                                         <label className="pb-2" htmlFor="file">
                                             Image
                                         </label>
@@ -378,16 +378,16 @@ const ListAProperty = () => {
                                             onChange={(e) =>
                                                 setFile(e.target.files[0])
                                             }
-                                            class="form-control form-control-lg form-control-a"
+                                            className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 2000000"
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div class="col-md-12 d-flex justify-content-center mb-3">
+                                <div className="col-md-12 d-flex justify-content-center mb-3">
                                     <button
                                         type="submit"
-                                        class="btn-submit-form"
+                                        className="btn-submit-form"
                                         disabled={!isValid}
                                     >
                                         {editProperty ? "Update" : "List"}

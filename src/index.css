@@ -222,6 +222,36 @@ a:hover {
     border-color: #222;
 }
 
+/* login tooltip */
+.login-input {
+    position: relative;
+}
+.login-tooltip {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    right: 30%;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #eee;
+    display: none;
+}
+.login-tooltip p {
+    margin-bottom: 2px;
+}
+.tooltip-pointer {
+    position: absolute;
+    top: -7px;
+    left: 10%;
+    width: 15px;
+    height: 15px;
+    background-color: #eee;
+    rotate: 45deg;
+}
+.login-input:hover .login-tooltip {
+    display: block;
+}
+
 /*------/ Bg Image /------*/
 .bg-image {
     background-repeat: no-repeat;
