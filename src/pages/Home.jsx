@@ -54,7 +54,8 @@ const Home = () => {
                                                 <p className="intro-subtitle intro-price">
                                                     <Link to="/">
                                                         <span className="price-a">
-                                                            rent | $ 12.000
+                                                            rent | Rs Rs
+                                                            12000000
                                                         </span>
                                                     </Link>
                                                 </p>
@@ -92,7 +93,8 @@ const Home = () => {
                                                 <p className="intro-subtitle intro-price">
                                                     <a href="/">
                                                         <span className="price-a">
-                                                            rent | $ 12.000
+                                                            rent | Rs Rs
+                                                            12000000
                                                         </span>
                                                     </a>
                                                 </p>
@@ -130,7 +132,8 @@ const Home = () => {
                                                 <p className="intro-subtitle intro-price">
                                                     <a href="/">
                                                         <span className="price-a">
-                                                            rent | $ 12.000
+                                                            rent | Rs Rs
+                                                            12000000
                                                         </span>
                                                     </a>
                                                 </p>
