@@ -210,7 +210,15 @@ const Footer = () => {
                                 </p>
                             </div>
                             <div className="credits">
-                                Designed with 🔥 & 💖 by{" "}
+                                UI from{" "}
+                                <span className="color-a">
+                                    <a
+                                        href="https://bootstrapmade.com/real-estate-agency-bootstrap-template/"
+                                        target={"_blank"}
+                                    >BootstrapMade</a>
+                                </span>
+                                <br />
+                                Developed with 🔥 & 💖 by{" "}
                                 <span className="color-a">M.Yousaf</span>
                                 <br />
                                 in <span className="color-a">
