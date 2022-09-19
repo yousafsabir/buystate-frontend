@@ -29,7 +29,7 @@ const Footer = () => {
                                             <span className="color-text-a">
                                                 Phone .
                                             </span>{" "}
-                                            +54 356 945234
+                                            +92 345 6789012
                                         </li>
                                         <li className="color-a">
                                             <span className="color-text-a">
