@@ -257,6 +257,11 @@ a:hover {
     transition-property: opacity, transform;
 }
 
+/* file input in list property */
+.file-input::file-selector-button {
+    height: 56px;
+}
+
 /*------/ Bg Image /------*/
 .bg-image {
     background-repeat: no-repeat;

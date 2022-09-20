@@ -378,8 +378,8 @@ const ListAProperty = () => {
                                             onChange={(e) =>
                                                 setFile(e.target.files[0])
                                             }
-                                            className="form-control form-control-lg form-control-a"
-                                            placeholder="e.g. 2000000"
+                                            className="form-control form-control-lg form-control-a file-input"
+                                            id="formFileLg"
                                             required
                                         />
                                     </div>
