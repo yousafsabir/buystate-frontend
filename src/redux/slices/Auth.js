@@ -21,9 +21,9 @@ export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
             localStorage.setItem("user", JSON.stringify(res.data.user));
             return res.data.user;
         } else {
+            console.log("Axios Response:", res);
             return thunkApi.rejectWithValue(res.data.message);
         }
-        console.log(res);
     } catch (error) {
         console.log("complete error", error);
         console.log("error message:", message);
