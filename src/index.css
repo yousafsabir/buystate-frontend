@@ -66,6 +66,7 @@ a:hover {
 }
 
 .link-a {
+    cursor: pointer;
     text-decoration: none;
     color: #ffffff;
     text-decoration: none;
