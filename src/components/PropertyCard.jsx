@@ -21,7 +21,7 @@ const PropertyCard = ({
     return (
         <div className="card-box-a card-shadow">
             <div className="img-box-a">
-                <img src={img} alt="" className="img-a img-fluid" />
+                <img src={img} alt="" className="img-a" />
             </div>
             <div className="card-overlay">
                 <div className="card-overlay-a-content">
