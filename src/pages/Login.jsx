@@ -70,7 +70,7 @@ const Login = () => {
                                             type="text"
                                             name="userId"
                                             className="form-control form-control-lg form-control-a login-input-field"
-                                            placeholder="Enter email, phone, username"
+                                            placeholder="Enter email, phone or username"
                                             required
                                             onChange={(e) =>
                                                 setUserId(e.target.value)
