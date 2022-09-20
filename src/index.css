@@ -171,7 +171,7 @@ a:hover {
 .btn-register {
     border-color: #2eca6a;
     border-radius: 0;
-    transition: transform 0.2s;
+    transition: background-color 0.5s ease;
 }
 .btn-login {
     background-color: #2eca6a;
@@ -181,18 +181,15 @@ a:hover {
     background-color: transparent;
     color: #2eca6a;
 }
-.btn-login:hover,
-.btn-register:hover {
-    transform: scale(1.1);
-}
 .btn-login:hover {
-    background-color: #2eca6a;
-    border-color: #2eca6a;
+    background-color: #26a356;
+    border-color: #26a356;
     color: #fff;
 }
 .btn-register:hover {
     background-color: transparent;
-    color: #2eca6a;
+    border-color: #26a356;
+    color: #26a356;
 }
 
 .btn-submit-form {
