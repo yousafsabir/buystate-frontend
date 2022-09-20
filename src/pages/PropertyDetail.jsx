@@ -16,17 +16,22 @@ const PropertyDetail = () => {
         propertyId;
     useEffect(() => {
         const unsub = async () => {
-            setLoading(true);
-            const res = await axios.post(apiUrl);
-            console.log(res);
-            if (res.data.status === 200) {
-                setProperty(res.data.property);
-                setUser(res.data.user);
-            } else {
+            try {
+                setLoading(true);
+                const res = await axios.post(apiUrl);
+                console.log(res);
+                if (res.data.status === 200) {
+                    setProperty(res.data.property);
+                    setUser(res.data.user);
+                } else {
+                    setError(true);
+                    setLoading(false);
+                }
+                setLoading(false);
+            } catch (error) {
                 setError(true);
                 setLoading(false);
             }
-            setLoading(false);
         };
         unsub();
         return unsub;
@@ -40,12 +45,12 @@ const PropertyDetail = () => {
                             <div className="title-wrap d-flex justify-content-between">
                                 <div className="title-box">
                                     <h2 className="title-a">
-                                        Latest Properties
+                                        Fetching Property
                                     </h2>
                                 </div>
                                 <div className="title-link">
                                     <Link to="/properties">
-                                        All Property
+                                        Properties
                                         <span className="bi bi-chevron-right"></span>
                                     </Link>
                                 </div>
