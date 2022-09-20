@@ -228,30 +228,35 @@ a:hover {
 }
 .login-tooltip {
     position: absolute;
-    top: 120%;
+    bottom: 120%;
     left: 0;
     right: 30%;
     padding: 8px;
     border-radius: 10px;
-    background-color: #eee;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    transition: opacity 1000ms ease;
+    transform: translateY(-15px);
+    transition: all 1000ms ease;
+    transition-property: opacity, transform;
 }
 .login-tooltip p {
     margin-bottom: 2px;
 }
 .tooltip-pointer {
     position: absolute;
-    top: -7px;
+    bottom: -7px;
     left: 10%;
     width: 15px;
     height: 15px;
-    background-color: #eee;
+    background-color: #fff;
     rotate: 45deg;
 }
 .login-input:hover .login-tooltip {
-    transition: opacity 1000ms ease 2000ms;
     opacity: 1;
+    transform: translateY(0px);
+    transition: all 800ms ease 1000ms;
+    transition-property: opacity, transform;
 }
 
 /*------/ Bg Image /------*/
