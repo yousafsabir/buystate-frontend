@@ -60,10 +60,10 @@ const Register = () => {
                     }}
                 >
                     <div className="row">
-                        <div className="col-md-2"></div>
-                        <div className="col-md-8">
+                        <div className="col-lg-2"></div>
+                        <div className="col-lg-8 col-md-12">
                             <div className="row px-3">
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             type="text"
@@ -82,7 +82,7 @@ const Register = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             name="lName"
@@ -101,7 +101,7 @@ const Register = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             type="text"
@@ -120,7 +120,7 @@ const Register = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             name="phone"
@@ -139,7 +139,7 @@ const Register = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             type="email"
@@ -158,7 +158,7 @@ const Register = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-6 col-sm-12 mb-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input
                                             name="password"
@@ -196,7 +196,7 @@ const Register = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-2"></div>
+                        <div className="col-lg-2"></div>
                     </div>
                 </form>
             </div>
