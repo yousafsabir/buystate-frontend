@@ -16,7 +16,7 @@ const PropertyCard = ({
 
     // Redirect to property detail
     const redirect = (id) => {
-        navigate("/propertydetail", { state: id });
+        navigate("/propertydetail/" + id);
     };
     return (
         <div className="card-box-a card-shadow">

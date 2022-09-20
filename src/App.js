@@ -36,7 +36,10 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/properties" element={<Properties />} />
                 <Route path="/mylistings" element={<MyListings />} />
-                <Route path="/propertydetail" element={<PropertyDetail />} />
+                <Route
+                    path="/propertydetail/:id"
+                    element={<PropertyDetail />}
+                />
                 <Route path="/listaproperty" element={<ListAProperty />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

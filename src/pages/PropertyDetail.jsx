@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Agent6 from "../assets/img/agent-6.jpg";
 
 const PropertyDetail = () => {
-    const propertyId = useLocation().state;
+    const propertyId = useParams().id;
     const [property, setProperty] = useState({});
+    const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
+    const apiUrl =
+        process.env.REACT_APP_API_URL +
+        "api/properties/propertydetail/" +
+        propertyId;
     useEffect(() => {
         const unsub = async () => {
             setLoading(true);
-            const res = await axios.post(apiUrl, {
-                find: { _id: propertyId },
-                sort: null,
-                limit: 1,
-            });
+            const res = await axios.post(apiUrl);
+            console.log(res);
             if (res.data.status === 200) {
-                res.data.properties.map((doc) => {
-                    return setProperty(doc);
-                });
+                setProperty(res.data.property);
+                setUser(res.data.user);
             } else {
                 setError(true);
                 setLoading(false);
@@ -290,7 +290,7 @@ const PropertyDetail = () => {
                                 <div className="col-md-6 col-lg-4">
                                     <div className="property-agent">
                                         <h4 className="title-agent">
-                                            Anabella Geller
+                                            {user.fName} {user.lName}
                                         </h4>
                                         <p className="color-text-a">
                                             Nulla porttitor accumsan tincidunt.
@@ -303,25 +303,13 @@ const PropertyDetail = () => {
                                             <li className="d-flex justify-content-between">
                                                 <strong>Phone:</strong>
                                                 <span className="color-text-a">
-                                                    (222) 4568932
-                                                </span>
-                                            </li>
-                                            <li className="d-flex justify-content-between">
-                                                <strong>Mobile:</strong>
-                                                <span className="color-text-a">
-                                                    777 287 378 737
+                                                    {user.phone}
                                                 </span>
                                             </li>
                                             <li className="d-flex justify-content-between">
                                                 <strong>Email:</strong>
                                                 <span className="color-text-a">
-                                                    annabella@example.com
-                                                </span>
-                                            </li>
-                                            <li className="d-flex justify-content-between">
-                                                <strong>Skype:</strong>
-                                                <span className="color-text-a">
-                                                    Annabela.ge
+                                                    {user.email}
                                                 </span>
                                             </li>
                                         </ul>
