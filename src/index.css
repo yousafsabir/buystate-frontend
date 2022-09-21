@@ -1364,6 +1364,55 @@ a:hover {
     }
 }
 
+/* Card Favourite button */
+
+.card-fovourite-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #313131;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transition: right 500ms ease-in;
+}
+
+.card-fovourite-btn:active {
+    scale: 0.95;
+}
+.card-fovourite-btn svg {
+    cursor: pointer !important;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    stroke: #313131;
+    stroke-width: 2px;
+    fill: none;
+}
+.card-fovourite-btn.active {
+    border-color: #2eca6a;
+}
+.card-fovourite-btn svg.active {
+    stroke: #2eca6a;
+    fill: #2eca6a;
+}
+
+@media screen and (min-width: 1280px) {
+    .card-fovourite-btn:not(.active) {
+        right: -30px;
+    }
+    .card-box-a:hover .card-fovourite-btn:not(.active) {
+        right: 20px;
+    }
+}
+
+/* ------------- */
+
 .card-overlay {
     position: absolute;
     width: 100%;
