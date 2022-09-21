@@ -1,6 +1,5 @@
 import React from "react";
-import { MdOutlineStar } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({
     propertyId,
