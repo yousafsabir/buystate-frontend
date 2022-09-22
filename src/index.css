@@ -1382,6 +1382,7 @@ a:hover {
     width: 30px;
     height: 30px;
     background-color: #313131;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
 }

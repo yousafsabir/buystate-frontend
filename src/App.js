@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
+import { getFavourites } from "./redux/slices/Property";
 import "./App.css";
 import BackToTop from "./components/BackToTop";
 import Footer from "./components/Footer";
@@ -14,6 +17,8 @@ import PropertyDetail from "./pages/PropertyDetail";
 import Register from "./pages/Register";
 
 function App() {
+    const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const isMobile = window.innerWidth <= 1024 ? true : false;
     const [preloader, setPreloader] = useState(true);
     window.addEventListener("load", () => {
@@ -28,6 +33,13 @@ function App() {
             setActiveOffset(false);
         }
     });
+    // dispatching for favourite properties
+    useEffect(() => {
+        const unsub = () => {
+            if (user) dispatch(getFavourites());
+        };
+        return unsub;
+    }, [user]);
     return (
         <div className="App">
             <Navbar reduce={activeOffset} />

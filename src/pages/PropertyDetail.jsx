@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Api from "../constants/ApiUrls";
 import Agent6 from "../assets/img/agent-6.jpg";
+import FavouriteBtn from "../components/FavouriteBtn";
 
 const PropertyDetail = () => {
     const propertyId = useParams().id;
@@ -119,43 +120,7 @@ const PropertyDetail = () => {
                                 </ol>
                             </nav>
                             <div className="detailpage-fav-box d-flex justify-content-lg-end align-items-center">
-                                {favourite ? (
-                                    <p
-                                        style={{
-                                            color: "#2eca6a",
-                                            margin: "0",
-                                            padding: "0",
-                                        }}
-                                    >
-                                        Your Favourite
-                                    </p>
-                                ) : (
-                                    <p
-                                        style={{
-                                            color: "#313131",
-                                            margin: "0",
-                                            padding: "0",
-                                        }}
-                                    >
-                                        Add to Favourite
-                                    </p>
-                                )}{" "}
-                                <div
-                                    className="fav-box d-flex justify-content-center align-items-center"
-                                    style={{ marginLeft: "8px" }}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        className={
-                                            favourite
-                                                ? "favourite-svg active"
-                                                : "favourite-svg"
-                                        }
-                                    >
-                                        <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
-                                    </svg>
-                                </div>
+                                <FavouriteBtn showText={true} id={propertyId} />
                             </div>
                         </div>
                     </div>

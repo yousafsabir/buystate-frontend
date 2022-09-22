@@ -39,9 +39,36 @@ export const addProperty = createAsyncThunk(
                 },
                 config
             );
-            console.log(res.data);
             if (res.data.status === 201) {
-                thunkApi.fulfillWithValue(res.data);
+                thunkApi.fulfillWithValue(res.data.favourites);
+            }
+        } catch (error) {
+            console.log("complete error", error);
+            console.log("error message:", message);
+            const message =
+                error.response.data.message ||
+                error.message ||
+                error.toString();
+            thunkApi.rejectWithValue(message);
+        }
+    }
+);
+export const getFavourites = createAsyncThunk(
+    "property/getFavourites",
+    async (args, thunkApi) => {
+        try {
+            const token = thunkApi.getState().auth.user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const res = await axios.post(Api.getFavourites, {}, config);
+            if (res.data.status === 200) {
+                console.log(res.data);
+                return res.data.favourites;
+            } else {
+                thunkApi.rejectWithValue("an error occoured");
             }
         } catch (error) {
             console.log("complete error", error);
@@ -58,7 +85,7 @@ export const addProperty = createAsyncThunk(
 const Property = createSlice({
     name: "property",
     initialState: {
-        properties: [],
+        favourites: [],
         loading: false,
         success: false,
         error: false,
@@ -92,6 +119,14 @@ const Property = createSlice({
             .addCase(addProperty.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
+                Toast.error(`${action.payload}`);
+            })
+            // Get Favourites
+            .addCase(getFavourites.pending, (state) => {})
+            .addCase(getFavourites.fulfilled, (state, action) => {
+                state.favourites = action.payload;
+            })
+            .addCase(getFavourites.rejected, (state, action) => {
                 Toast.error(`${action.payload}`);
             }),
 });
