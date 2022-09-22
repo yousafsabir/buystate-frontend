@@ -26,22 +26,28 @@ const PropertyCard = ({
                 <img src={img} alt="" className="img-a" />
             </div>
             <div className="card-overlay">
-                {/* Favourite button */}
-                <button
+                {/* Favourite indicator */}
+                <div
                     className={
                         favourite
-                            ? "card-fovourite-btn active"
-                            : "card-fovourite-btn"
+                            ? "card-fav-wrapper"
+                            : "card-fav-wrapper active"
                     }
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        className={favourite ? "active" : ""}
-                    >
-                        <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
-                    </svg>
-                </button>
+                    <div className="fav-box d-flex justify-content-center align-items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className={
+                                favourite
+                                    ? "favourite-svg active"
+                                    : "favourite-svg"
+                            }
+                        >
+                            <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+                        </svg>
+                    </div>
+                </div>
 
                 <div className="card-overlay-a-content">
                     <div className="card-header-a">

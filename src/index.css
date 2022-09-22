@@ -1364,53 +1364,48 @@ a:hover {
     }
 }
 
-/* Card Favourite button */
+/* favourite button */
 
-.card-fovourite-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 2px solid #313131;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    transition: right 500ms ease-in;
-}
-
-.card-fovourite-btn:active {
-    scale: 0.95;
-}
-.card-fovourite-btn svg {
-    cursor: pointer !important;
+.favourite-svg {
     margin: 0;
     padding: 0;
     width: 18px;
     height: 18px;
-    stroke: #313131;
-    stroke-width: 2px;
-    fill: none;
+    fill: #fff;
 }
-.card-fovourite-btn.active {
-    border-color: #2eca6a;
+
+.favourite-svg.active {
+    fill: hsl(148, 79%, 60%);
 }
-.card-fovourite-btn svg.active {
-    stroke: #2eca6a;
-    fill: #2eca6a;
+
+.fav-box {
+    width: 30px;
+    height: 30px;
+    background-color: #313131;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.fav-box:active {
+    transform: scale(0.95) !important;
+}
+
+.card-fav-wrapper {
+    position: absolute;
+    z-index: 10;
+    top: 20px;
+    right: 20px;
+    transition: right 500ms ease-in;
 }
 
 @media screen and (min-width: 1280px) {
-    .card-fovourite-btn:not(.active) {
+    .card-fav-wrapper.active {
         right: -30px;
     }
-    .card-box-a:hover .card-fovourite-btn:not(.active) {
+    .card-box-a:hover .card-fav-wrapper.active {
         right: 20px;
     }
 }
-
 /* ------------- */
 
 .card-overlay {
