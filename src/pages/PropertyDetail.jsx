@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import Api from "../constants/ApiUrls";
 import Agent6 from "../assets/img/agent-6.jpg";
 
 const PropertyDetail = () => {
@@ -10,10 +11,7 @@ const PropertyDetail = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const apiUrl =
-        process.env.REACT_APP_API_URL +
-        "api/properties/propertydetail/" +
-        propertyId;
+    const apiUrl = Api.propertyDetail + propertyId;
     useEffect(() => {
         const unsub = async () => {
             try {

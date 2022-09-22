@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 
 const MyListings = () => {
@@ -12,14 +13,13 @@ const MyListings = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/mylistings";
     useEffect(() => {
         const unsub = async () => {
             try {
                 setLoading(true);
                 console.log("before loading");
                 const res = await axios.post(
-                    apiUrl,
+                    Api.myListings,
                     {
                         sort: "descending",
                         page: Page,

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Api from "../../constants/ApiUrls";
 import { storage } from "../../firebase";
 import {
     deleteObject,
@@ -8,9 +9,6 @@ import {
     uploadBytes,
 } from "firebase/storage";
 import Toast from "../../utils/Toast";
-
-// Api Url
-const apiUrl = process.env.REACT_APP_API_URL + "api/properties/";
 
 export const addProperty = createAsyncThunk(
     "property/add",
@@ -32,7 +30,7 @@ export const addProperty = createAsyncThunk(
                 },
             };
             const res = await axios.post(
-                apiUrl + "create",
+                Api.addProperty,
                 {
                     ...args.data,
                     image,

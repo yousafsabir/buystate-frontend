@@ -1,13 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import toast from "react-hot-toast";
+import Api from "../../constants/ApiUrls";
 import Toast from "../../utils/Toast";
 
 // get user from local storage
 const user = JSON.parse(localStorage.getItem("user"));
-
-// Api Url
-const apiUrl = process.env.REACT_APP_API_URL + "api/users/";
 
 // thunks
 
@@ -16,7 +13,7 @@ const apiUrl = process.env.REACT_APP_API_URL + "api/users/";
 // -----
 export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
     try {
-        const res = await axios.post(apiUrl + "login", args);
+        const res = await axios.post(Api.login, args);
         if (res.data.status === 200) {
             localStorage.setItem("user", JSON.stringify(res.data.user));
             return res.data.user;
@@ -40,7 +37,7 @@ export const register = createAsyncThunk(
     "auth/register",
     async (args, thunkApi) => {
         try {
-            const res = await axios.post(apiUrl, args);
+            const res = await axios.post(Api.register, args);
             if (res.data) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 
 const Properties = () => {
@@ -16,7 +17,7 @@ const Properties = () => {
             try {
                 setLoading(true);
                 const res = await axios.post(
-                    apiUrl,
+                    Api.properties,
                     {
                         sort: "descending",
                         page: Page,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Api from "../constants/ApiUrls";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
 import PropertyCard from "./PropertyCard";
@@ -15,7 +16,7 @@ const LatestPropetyCarousel = () => {
         const unsub = async () => {
             try {
                 setLoading(true);
-                const res = await axios.post(apiUrl, {
+                const res = await axios.post(Api.properties, {
                     sort: "descending",
                     limit: 4,
                 });
