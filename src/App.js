@@ -15,6 +15,7 @@ import MyListings from "./pages/MyListings";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
 import Register from "./pages/Register";
+import Favourites from "./pages/Favourites";
 
 function App() {
     const { user } = useSelector((state) => state.auth);
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/properties" element={<Properties />} />
                 <Route path="/mylistings" element={<MyListings />} />
+                <Route path="/favourites" element={<Favourites />} />
                 <Route
                     path="/propertydetail/:id"
                     element={<PropertyDetail />}

@@ -13,6 +13,7 @@ const Api = Object.freeze({
     properties: property + "get",
     propertyDetail: property + "propertydetail/",
     getFavourites: property + "favourites",
+    getFavouriteProperties: property + "favouriteproperties",
 });
 
 export default Api;
