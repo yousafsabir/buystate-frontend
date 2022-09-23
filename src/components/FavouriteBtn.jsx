@@ -1,14 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setFavourites } from "../redux/slices/Property";
 
 const FavouriteBtn = ({
     id,
     showText = false,
     setFavourite = (bool) => {},
 }) => {
-    const { favourites } = useSelector((state) => state.property);
+    const dispatch = useDispatch();
+    const { favourites, loading } = useSelector((state) => state.property);
     const favourite = favourites.includes(id);
+    // returning boolean to property card for button's positioning
     setFavourite(favourite);
+
+    const submit = () => {
+        dispatch(setFavourites({ propertyId: id }));
+    };
     return (
         <>
             {showText && (
@@ -25,6 +32,8 @@ const FavouriteBtn = ({
             <button
                 className="fav-box d-flex justify-content-center align-items-center"
                 style={{ marginLeft: "8px" }}
+                onClick={submit}
+                disabled={loading}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

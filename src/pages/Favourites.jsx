@@ -7,6 +7,7 @@ import PropertyCard from "../components/PropertyCard";
 
 const Favourites = () => {
     const { user } = useSelector((state) => state.auth);
+    const { favourites } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
     const [Page, setPage] = useState(1);
@@ -54,7 +55,7 @@ const Favourites = () => {
         };
         unsub();
         return unsub;
-    }, [Page]);
+    }, [Page, favourites]);
     if (loading || error) {
         return (
             <section className="intro-single">

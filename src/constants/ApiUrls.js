@@ -12,7 +12,7 @@ const Api = Object.freeze({
     myListings: property + "mylistings",
     properties: property + "get",
     propertyDetail: property + "propertydetail/",
-    getFavourites: property + "favourites",
+    getFavourites: property + "favourites", // multi function api
     getFavouriteProperties: property + "favouriteproperties",
 });
 

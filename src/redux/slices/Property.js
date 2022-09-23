@@ -65,8 +65,34 @@ export const getFavourites = createAsyncThunk(
             };
             const res = await axios.post(Api.getFavourites, {}, config);
             if (res.data.status === 200) {
-                console.log(res.data);
                 return res.data.favourites;
+            } else {
+                thunkApi.rejectWithValue("an error occoured");
+            }
+        } catch (error) {
+            console.log("complete error", error);
+            console.log("error message:", message);
+            const message =
+                error.response.data.message ||
+                error.message ||
+                error.toString();
+            thunkApi.rejectWithValue(message);
+        }
+    }
+);
+export const setFavourites = createAsyncThunk(
+    "property/setFavourites",
+    async (args, thunkApi) => {
+        try {
+            const token = thunkApi.getState().auth.user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const res = await axios.post(Api.getFavourites, args, config);
+            if (res.data.status === 200) {
+                return res.data;
             } else {
                 thunkApi.rejectWithValue("an error occoured");
             }
@@ -127,6 +153,19 @@ const Property = createSlice({
                 state.favourites = action.payload;
             })
             .addCase(getFavourites.rejected, (state, action) => {
+                Toast.error(`${action.payload}`);
+            })
+            // Set Favourites
+            .addCase(setFavourites.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(setFavourites.fulfilled, (state, action) => {
+                state.loading = false;
+                state.favourites = action.payload.favourites;
+                Toast.success(`${action.payload.message}`);
+            })
+            .addCase(setFavourites.rejected, (state, action) => {
+                state.loading = false;
                 Toast.error(`${action.payload}`);
             }),
 });
