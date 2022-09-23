@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FavouriteBtn from "./FavouriteBtn";
 
@@ -15,7 +15,7 @@ const PropertyCard = ({
 }) => {
     const navigate = useNavigate();
 
-    const favourite = false;
+    const [favourite, setFavourite] = useState(false);
 
     // Redirect to property detail
     const redirect = (id) => {
@@ -35,7 +35,7 @@ const PropertyCard = ({
                             : "card-fav-wrapper active"
                     }
                 >
-                    <FavouriteBtn id={propertyId} />
+                    <FavouriteBtn id={propertyId} setFavourite={setFavourite} />
                 </div>
 
                 <div className="card-overlay-a-content">

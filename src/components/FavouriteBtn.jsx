@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const FavouriteBtn = ({ id, showText = false }) => {
+const FavouriteBtn = ({
+    id,
+    showText = false,
+    setFavourite = (bool) => {},
+}) => {
     const { favourites } = useSelector((state) => state.property);
     const favourite = favourites.includes(id);
-
+    setFavourite(favourite);
     return (
         <>
             {showText && (
