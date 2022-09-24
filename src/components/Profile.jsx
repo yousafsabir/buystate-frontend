@@ -26,7 +26,7 @@ const Profile = () => {
                 </Link>
                 <button
                     className="btn btn-register"
-                    style={{ marginInline: "1.125rem" }}
+                    style={{ marginInline: "1.125rem", marginTop: "0.75rem" }}
                     onClick={() => dispatch(logout())}
                 >
                     Logout
