@@ -19,7 +19,6 @@ const FavouriteBtn = ({
 
     const submit = () => {
         if (!user) {
-            navigate("/login");
             return Toast.warning("You need to Login First");
         }
         dispatch(setFavourites({ propertyId: id }));
