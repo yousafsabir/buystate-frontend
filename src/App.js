@@ -37,8 +37,9 @@ function App() {
     // dispatching for favourite properties
     useEffect(() => {
         const unsub = () => {
-            if (user) dispatch(getFavourites());
+            dispatch(getFavourites());
         };
+        unsub();
         return unsub;
     }, [user]);
     return (

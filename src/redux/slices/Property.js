@@ -57,7 +57,11 @@ export const getFavourites = createAsyncThunk(
     "property/getFavourites",
     async (args, thunkApi) => {
         try {
-            const token = thunkApi.getState().auth.user.token;
+            const user = thunkApi.getState().auth.user;
+            if (!user) return []; // As this function runs each time when user value in auth changes
+            // So on logout, it checks and automatically clears the favourites array in property
+
+            const token = user.token;
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
