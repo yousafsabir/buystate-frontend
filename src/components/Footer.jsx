@@ -12,15 +12,19 @@ const Footer = () => {
                             <div className="widget-a">
                                 <div className="w-header-a">
                                     <h3 className="w-title-a text-brand">
-                                        EstateAgency
+                                        Buy
+                                        <span className="color-b">Estate</span>
                                     </h3>
                                 </div>
                                 <div className="w-body-a">
                                     <p className="w-text-a color-text-a">
-                                        Enim minim veniam quis nostrud
-                                        exercitation ullamco laboris nisi ut
-                                        aliquip exea commodo consequat duis sed
-                                        aute irure.
+                                        We are specialists in the prime
+                                        residential sales and rentals property
+                                        markets. We are trusted implicitly by
+                                        our customers, from private individuals
+                                        and corporations. We will find our
+                                        clients the luxury property for sale or
+                                        rental that they demand and desire.
                                     </p>
                                 </div>
                                 <div className="w-footer-a">
@@ -215,7 +219,9 @@ const Footer = () => {
                                     <a
                                         href="https://bootstrapmade.com/real-estate-agency-bootstrap-template/"
                                         target={"_blank"}
-                                    >BootstrapMade</a>
+                                    >
+                                        BootstrapMade
+                                    </a>
                                 </span>
                                 <br />
                                 Developed with 🔥 & 💖 by{" "}
