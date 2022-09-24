@@ -12,17 +12,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     useEffect(() => {
-        if (idType === "userName") {
-            setText("Enter Username");
-        } else if (idType === "email") {
-            setText("Enter Email");
-        } else if (idType === "phone") {
-            setText("Enter Phone");
-        }
-    }, [idType]);
-
-    // Clearing the form on success
-    useEffect(() => {
         const unsub = () => {
             if (user) {
                 dispatch(resetStatus());
