@@ -1,19 +1,27 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setFavourites } from "../redux/slices/Property";
+import Toast from "../utils/Toast";
 
 const FavouriteBtn = ({
     id,
     showText = false,
     setFavourite = (bool) => {},
 }) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
     const { favourites, loading } = useSelector((state) => state.property);
     const favourite = favourites.includes(id);
     // returning boolean to property card for button's positioning
     setFavourite(favourite);
 
     const submit = () => {
+        if (!user) {
+            navigate("/login");
+            return Toast.warning("You need to Login First");
+        }
         dispatch(setFavourites({ propertyId: id }));
     };
     return (
