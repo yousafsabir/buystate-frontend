@@ -6,19 +6,11 @@ import { login, resetStatus } from "../redux/slices/Auth";
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { loading, success, error } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
 
-    const [idType, setIdType] = useState("");
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
 
-    // console.log(idType, userId, password);
-
-    // Check if the use have attempted all fields
-    const isValid = Boolean(idType && userId && password);
-
-    // Setting Placeholder According to idType
-    const [text, setText] = useState("Select an option above");
     useEffect(() => {
         if (idType === "userName") {
             setText("Enter Username");
@@ -31,14 +23,15 @@ const Login = () => {
 
     // Clearing the form on success
     useEffect(() => {
-        if (!loading && success) {
-            setIdType("");
-            setUserId("");
-            setPassword("");
-            dispatch(resetStatus());
-            navigate("/");
-        }
-    }, [loading]);
+        const unsub = () => {
+            if (user) {
+                dispatch(resetStatus());
+                navigate("/");
+            }
+        };
+        unsub();
+        return unsub();
+    }, [user]);
     const submit = () => {
         dispatch(login({ id: userId, password }));
     };

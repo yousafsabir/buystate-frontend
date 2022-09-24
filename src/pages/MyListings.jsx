@@ -17,7 +17,6 @@ const MyListings = () => {
         const unsub = async () => {
             try {
                 setLoading(true);
-                console.log("before loading");
                 const res = await axios.post(
                     Api.myListings,
                     {
@@ -31,8 +30,6 @@ const MyListings = () => {
                         },
                     }
                 );
-                console.log("after loading");
-                console.log(res);
                 if (res.data.status === 200) {
                     setProperties(res.data.properties);
                     setPagination(res.data.pagination);

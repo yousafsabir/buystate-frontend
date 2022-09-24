@@ -6,9 +6,7 @@ import { register, resetStatus } from "../redux/slices/Auth";
 const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { loading, success, error, editMode } = useSelector(
-        (state) => state.auth
-    );
+    const { user, editMode } = useSelector((state) => state.auth);
 
     const [form, setForm] = useState({
         fName: "",
@@ -27,19 +25,11 @@ const Register = () => {
 
     // Clearing the form on success
     useEffect(() => {
-        if (!loading && success) {
-            setForm({
-                fName: "",
-                lName: "",
-                userName: "",
-                phone: "",
-                email: "",
-                password: "",
-            });
+        if (user) {
             dispatch(resetStatus());
             navigate("/");
         }
-    }, [loading]);
+    }, [user]);
 
     const submit = () => {
         dispatch(register(form));
