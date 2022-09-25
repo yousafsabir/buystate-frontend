@@ -12,7 +12,20 @@ const Profile = () => {
             <span className="nav-link dropdown-toggle">Profile</span>
             <div className="dropdown-menu">
                 <div className="dropdown-item ">
-                    <BsPersonCircle style={{ fontSize: "1.35rem" }} />{" "}
+                    {user.image !== "null" ? (
+                        <img
+                            src={user.image}
+                            style={{
+                                width: "30px",
+                                height: "30px",
+                                objectFit: "cover",
+                                objectPosition: "top center",
+                                borderRadius: "50%",
+                            }}
+                        />
+                    ) : (
+                        <BsPersonCircle style={{ fontSize: "1.85rem" }} />
+                    )}{" "}
                     {user?.fName}
                 </div>
                 <Link to={"/favourites"} className="dropdown-item">

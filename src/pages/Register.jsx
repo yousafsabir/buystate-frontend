@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import empty from "is-empty";
+import Camera from "../assets/img/camera.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register, resetStatus } from "../redux/slices/Auth";
@@ -7,6 +9,7 @@ const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user, editMode } = useSelector((state) => state.auth);
+    const photoInput = useRef();
 
     const [form, setForm] = useState({
         fName: "",
@@ -17,6 +20,8 @@ const Register = () => {
         password: "",
     });
     const { fName, lName, userName, phone, email, password } = form;
+
+    const [photo, setPhoto] = useState({});
 
     // Check if the use have attempted all fields
     const isValid = Boolean(
@@ -31,8 +36,8 @@ const Register = () => {
         }
     }, [user]);
 
-    const submit = () => {
-        dispatch(register(form));
+    const submit = async () => {
+        dispatch(register({ data: form, photo }));
     };
     return (
         <>
@@ -53,6 +58,41 @@ const Register = () => {
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8 col-md-12">
                             <div className="row px-3">
+                                <div className="col-md-12 d-flex justify-content-center mb-4">
+                                    <img
+                                        id="signup-img"
+                                        src={
+                                            empty(photo)
+                                                ? Camera
+                                                : URL.createObjectURL(photo)
+                                        }
+                                        alt=""
+                                        style={{
+                                            width: "200px",
+                                            height: "200px",
+                                            cursor: "pointer",
+                                            objectFit: "cover",
+                                            objectPosition: "top center",
+                                            borderRadius: "50%",
+                                            borderWidth: "6px",
+                                            borderStyle: "solid",
+                                            borderColor: empty(photo)
+                                                ? "#494949"
+                                                : "#2eca6a",
+                                        }}
+                                        onClick={() => {
+                                            photoInput.current.click();
+                                        }}
+                                    />
+                                    <input
+                                        ref={photoInput}
+                                        type="file"
+                                        style={{ display: "none" }}
+                                        onChange={(e) =>
+                                            setPhoto(e.target.files[0])
+                                        }
+                                    />
+                                </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
                                         <input

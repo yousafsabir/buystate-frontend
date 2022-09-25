@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import Api from "../../constants/ApiUrls";
+import uploadPhoto from "../../utils/uploadPhoto";
 import Toast from "../../utils/Toast";
 
 // get user from local storage
@@ -37,7 +38,12 @@ export const register = createAsyncThunk(
     "auth/register",
     async (args, thunkApi) => {
         try {
-            const res = await axios.post(Api.register, args);
+            const { image, imageId } = await uploadPhoto(args.photo);
+            const res = await axios.post(Api.register, {
+                ...args.data,
+                image,
+                imageId,
+            });
             if (res.data) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;
@@ -125,6 +131,7 @@ const Auth = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.user = action.payload;
+                Toast.dismiss();
                 Toast.success(`welcome ${state.user.fName}`, "😇");
             })
             .addCase(register.rejected, (state, action) => {

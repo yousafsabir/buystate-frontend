@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import Api from "../../constants/ApiUrls";
-import { storage } from "../../firebase";
-import {
-    deleteObject,
-    getDownloadURL,
-    ref,
-    uploadBytes,
-} from "firebase/storage";
+import uploadPhoto from "../../utils/uploadPhoto";
 import Toast from "../../utils/Toast";
 
 export const addProperty = createAsyncThunk(
@@ -15,12 +9,7 @@ export const addProperty = createAsyncThunk(
     async (args, thunkApi) => {
         try {
             // sending image to firebase storage
-            const imageId =
-                Date.now().toString(36) + Math.random().toString(36).substr(2);
-            const fileRef = ref(storage, imageId);
-            await uploadBytes(fileRef, args.photo);
-            const image = await getDownloadURL(fileRef);
-
+            const { image, imageId } = await uploadPhoto(args.photo);
             // uploading to database
             const userId = thunkApi.getState().auth.user._id;
             const token = thunkApi.getState().auth.user.token;

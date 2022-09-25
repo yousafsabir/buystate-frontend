@@ -292,7 +292,11 @@ const PropertyDetail = () => {
                             <div className="row">
                                 <div className="col-md-6 col-lg-4">
                                     <img
-                                        src={Agent6}
+                                        src={
+                                            user.image !== "null" || null
+                                                ? user.image
+                                                : Agent6
+                                        }
                                         alt=""
                                         className="img-fluid"
                                     />
