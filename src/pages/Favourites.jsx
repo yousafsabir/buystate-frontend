@@ -8,6 +8,7 @@ import PropertyCard from "../components/PropertyCard";
 const Favourites = () => {
     const { user } = useSelector((state) => state.auth);
     const { favourites } = useSelector((state) => state.property);
+    const { suspends } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
     const [Page, setPage] = useState(1);
@@ -164,21 +165,16 @@ const Favourites = () => {
                             </div>
                         </div>
                         {properties?.map((property) => {
-                            return (
-                                <div className="col-md-4" key={property._id}>
-                                    <PropertyCard
-                                        propertyId={property._id}
-                                        img={property.image}
-                                        title={property.title}
-                                        status={property.status}
-                                        price={property.price}
-                                        area={property.area}
-                                        baths={property.baths}
-                                        beds={property.beds}
-                                        garages={property.garages}
-                                    />
-                                </div>
-                            );
+                            if (!suspends.includes(property._id)) {
+                                return (
+                                    <div
+                                        className="col-md-4"
+                                        key={property._id}
+                                    >
+                                        <PropertyCard {...property} />
+                                    </div>
+                                );
+                            }
                         })}
                     </div>
 

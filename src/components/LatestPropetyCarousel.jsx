@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import Api from "../constants/ApiUrls";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper";
 import PropertyCard from "./PropertyCard";
 
 const LatestPropetyCarousel = () => {
+    const { suspends } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -127,23 +129,17 @@ const LatestPropetyCarousel = () => {
                     }}
                 >
                     {properties?.map((property) => {
-                        return (
-                            <SwiperSlide key={property._id}>
-                                <div className="carousel-item-b swiper-slide">
-                                    <PropertyCard
-                                        propertyId={property._id}
-                                        img={property.image}
-                                        title={property.title}
-                                        status={property.status}
-                                        price={property.price}
-                                        area={property.area}
-                                        baths={property.baths}
-                                        beds={property.beds}
-                                        garages={property.garages}
-                                    />
-                                </div>
-                            </SwiperSlide>
-                        );
+                        if (!suspends.includes(property._id)) {
+                            if (!suspends.includes(property._id)) {
+                                return (
+                                    <SwiperSlide key={property._id}>
+                                        <div className="carousel-item-b swiper-slide">
+                                            <PropertyCard {...property} />
+                                        </div>
+                                    </SwiperSlide>
+                                );
+                            }
+                        }
                     })}
                 </Swiper>
                 <div className="propery-carousel-pagination carousel-pagination"></div>

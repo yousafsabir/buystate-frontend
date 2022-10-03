@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FavouriteBtn from "./FavouriteBtn";
+import Suspended from "../assets/img/suspended.png";
 
 const PropertyCard = ({
-    propertyId,
-    img,
+    _id,
+    image,
     title,
     status,
     price,
@@ -15,6 +17,18 @@ const PropertyCard = ({
 }) => {
     const navigate = useNavigate();
 
+    const { suspends } = useSelector((state) => state.property);
+
+    const [suspended, setSuspended] = useState(false);
+
+    useEffect(() => {
+        if (suspends.includes(_id)) {
+            setSuspended(true);
+        } else {
+            setSuspended(false);
+        }
+    }, [suspends]);
+
     const [favourite, setFavourite] = useState(false);
 
     // Redirect to property detail
@@ -23,8 +37,15 @@ const PropertyCard = ({
     };
     return (
         <div className="card-box-a card-shadow">
+            {/* suspended div */}
+            {suspended && (
+                <div className="suspended-div">
+                    <img src={Suspended} alt="" />
+                </div>
+            )}
+            {/* ------------- */}
             <div className="img-box-a">
-                <img src={img} alt="" className="img-a" />
+                <img src={image} alt="" className="img-a" />
             </div>
             <div className="card-overlay">
                 {/* Favourite indicator */}
@@ -35,7 +56,7 @@ const PropertyCard = ({
                             : "card-fav-wrapper active"
                     }
                 >
-                    <FavouriteBtn id={propertyId} setFavourite={setFavourite} />
+                    <FavouriteBtn id={_id} setFavourite={setFavourite} />
                 </div>
 
                 <div className="card-overlay-a-content">
@@ -50,10 +71,7 @@ const PropertyCard = ({
                                 {status} | Rs {price}
                             </span>
                         </div>
-                        <span
-                            onClick={() => redirect(propertyId)}
-                            className="link-a"
-                        >
+                        <span onClick={() => redirect(_id)} className="link-a">
                             Click here to view
                             <span className="bi bi-chevron-right"></span>
                         </span>

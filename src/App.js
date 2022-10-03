@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import { getFavourites } from "./redux/slices/Property";
+import { getFavourites, getSuspends } from "./redux/slices/Property";
 import "./App.css";
 import BackToTop from "./components/BackToTop";
 import Footer from "./components/Footer";
@@ -38,6 +38,7 @@ function App() {
     useEffect(() => {
         const unsub = () => {
             dispatch(getFavourites());
+            dispatch(getSuspends());
         };
         unsub();
         return unsub;

@@ -1,5 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+/* Colors of the website (not all of them) */
+:root {
+    --default-green: hsl(143, 63%, 49%);
+    --default-green-dark: #26a356;
+    /* My Color Pallete */
+    /* Green */
+    --green-100: hsl(143, 60%, 80%);
+    --green-200: hsl(143, 60%, 70%);
+    --green-300: hsl(143, 60%, 60%);
+    --green-400: hsl(143, 60%, 50%);
+    --green-500: hsl(143, 60%, 40%);
+    --green-600: hsl(143, 70%, 30%);
+    --green-700: hsl(143, 80%, 15%);
+    --green-800: hsl(143, 90%, 7%);
+    --green-900: hsl(143, 100%, 15%);
+    /* Red */
+    --red-100: #fee2e2;
+    --red-200: #fecaca;
+    --red-900: hsl(0, 63%, 25%);
+    /* Yellow */
+    --yellow-100: #fef9c3;
+    --yellow-200: #fef08a;
+    --yellow-900: hsl(28, 100%, 25%);
+}
+
 body {
     font-family: "Poppins", sans-serif;
     color: #555555;
@@ -260,6 +285,56 @@ a:hover {
 /* file input in list property */
 .file-input::file-selector-button {
     height: 56px;
+}
+
+/* My listings page CTA div */
+.mylistings-cta {
+    margin-top: -1.5rem;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+}
+/* Color of buttons */
+.mylistings-cta > button:nth-child(1) {
+    color: var(--green-900);
+    background-color: var(--green-100);
+}
+.mylistings-cta > button:nth-child(1):hover {
+    background-color: var(--green-200);
+}
+.mylistings-cta > button:nth-child(2) {
+    color: var(--yellow-900);
+    background-color: var(--yellow-100);
+}
+.mylistings-cta > button:nth-child(2):hover {
+    background-color: var(--yellow-200);
+}
+.mylistings-cta > button:nth-child(3) {
+    color: var(--red-900);
+    background-color: var(--red-100);
+}
+.mylistings-cta > button:nth-child(3):hover {
+    background-color: var(--red-200);
+}
+.mylistings-cta > button {
+    border: none;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Suspended Div */
+.suspended-div {
+    position: absolute;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.suspended-div > img {
+    max-width: 200px;
 }
 
 /*------/ Bg Image /------*/

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { setSuspended } from "../redux/slices/Property";
 import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 
 const MyListings = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
+    const { suspends } = useSelector((state) => state.property);
+    const { loading: actionLoading } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
     const [Page, setPage] = useState(1);
@@ -165,17 +169,32 @@ const MyListings = () => {
                         {properties?.map((property) => {
                             return (
                                 <div className="col-md-4" key={property._id}>
-                                    <PropertyCard
-                                        propertyId={property._id}
-                                        img={property.image}
-                                        title={property.title}
-                                        status={property.status}
-                                        price={property.price}
-                                        area={property.area}
-                                        baths={property.baths}
-                                        beds={property.beds}
-                                        garages={property.garages}
-                                    />
+                                    <div className="col-md-12">
+                                        <PropertyCard {...property} />
+                                    </div>
+                                    <div className="col-md-12 d-flex justify-content-center align-items-center mylistings-cta">
+                                        <button disabled={actionLoading}>
+                                            Update
+                                        </button>
+                                        <button
+                                            disabled={actionLoading}
+                                            onClick={() =>
+                                                dispatch(
+                                                    setSuspended({
+                                                        propertyId:
+                                                            property._id,
+                                                    })
+                                                )
+                                            }
+                                        >
+                                            {suspends.includes(property._id)
+                                                ? "Resume"
+                                                : "Suspend"}
+                                        </button>
+                                        <button disabled={actionLoading}>
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             );
                         })}

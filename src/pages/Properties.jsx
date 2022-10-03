@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 
 const Properties = () => {
+    const { suspends } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
     const [Page, setPage] = useState(1);
@@ -153,22 +155,23 @@ const Properties = () => {
                                 </form>
                             </div>
                         </div>
-                        {properties?.map((property) => {
+                        {/* {properties?.map((property) => {
                             return (
                                 <div className="col-md-4" key={property._id}>
-                                    <PropertyCard
-                                        propertyId={property._id}
-                                        img={property.image}
-                                        title={property.title}
-                                        status={property.status}
-                                        price={property.price}
-                                        area={property.area}
-                                        baths={property.baths}
-                                        beds={property.beds}
-                                        garages={property.garages}
-                                    />
+                                    <PropertyCard {...property} />
                                 </div>
                             );
+                        })} */}
+                        {properties?.map((property) => {
+                            if (!suspends.includes(property._id))
+                                return (
+                                    <div
+                                        className="col-md-4"
+                                        key={property._id}
+                                    >
+                                        <PropertyCard {...property} />
+                                    </div>
+                                );
                         })}
                     </div>
 
