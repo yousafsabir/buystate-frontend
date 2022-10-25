@@ -280,7 +280,6 @@ const Property = createSlice({
             .addCase(removeProperty.fulfilled, (state, action) => {
                 state.loading = false;
                 state.message = "removed" + action.payload;
-                console.log("message", state.message);
                 Toast.dismiss();
                 Toast.success("Successfully Removed Property");
             })

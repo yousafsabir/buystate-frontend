@@ -67,7 +67,6 @@ const MyListings = () => {
     // Removing Property from state after remove;
     useEffect(() => {
         if (message.slice(0, 7) === "removed") {
-            console.log("removing property");
             setProperties(
                 properties.filter(
                     (item) => item._id !== message.slice(7, message.length)
