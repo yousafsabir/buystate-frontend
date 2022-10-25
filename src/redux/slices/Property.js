@@ -158,6 +158,36 @@ export const setSuspended = createAsyncThunk(
         }
     }
 );
+export const removeProperty = createAsyncThunk(
+    "property/remove",
+    async (args, thunkApi) => {
+        try {
+            const token = thunkApi.getState().auth.user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const res = await axios.delete(
+                Api.removeProperty + args.propertyId,
+                config
+            );
+            if (res.data.status === 200) {
+                return thunkApi.fulfillWithValue(args.propertyId);
+            } else {
+                return thunkApi.rejectWithValue(res.data.message);
+            }
+        } catch (error) {
+            console.log("complete error", error);
+            console.log("error message:", error.message);
+            const message =
+                error.response.data.message ||
+                error.message ||
+                error.toString();
+            thunkApi.rejectWithValue(message);
+        }
+    }
+);
 
 const Property = createSlice({
     name: "property",
@@ -176,6 +206,7 @@ const Property = createSlice({
             state.success = false;
             state.error = false;
             state.editProperty = false;
+            state.message = "";
         },
         setEditProperty: (state) => {
             state.editProperty = true;
@@ -239,7 +270,23 @@ const Property = createSlice({
             })
             .addCase(setSuspended.rejected, (state, action) => {
                 state.loading = false;
-                Toast.success(`${action.payload.message}`);
+                Toast.error(`${action.payload.message}`);
+            })
+            // Remove Property
+            .addCase(removeProperty.pending, (state) => {
+                state.loading = true;
+                Toast.loading("Removing Property");
+            })
+            .addCase(removeProperty.fulfilled, (state, action) => {
+                state.loading = false;
+                state.message = "removed" + action.payload;
+                console.log("message", state.message);
+                Toast.dismiss();
+                Toast.success("Successfully Removed Property");
+            })
+            .addCase(removeProperty.rejected, (state, action) => {
+                state.loading = false;
+                Toast.error(`${action.payload}`);
             }),
 });
 

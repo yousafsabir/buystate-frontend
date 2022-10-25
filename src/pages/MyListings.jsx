@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { setSuspended } from "../redux/slices/Property";
+import {
+    setSuspended,
+    removeProperty,
+    resetStatus,
+} from "../redux/slices/Property";
 import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 
 const MyListings = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
-    const { suspends } = useSelector((state) => state.property);
+    const { suspends, message } = useSelector((state) => state.property);
     const { loading: actionLoading } = useSelector((state) => state.property);
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
@@ -59,6 +63,19 @@ const MyListings = () => {
         unsub();
         return unsub;
     }, [Page]);
+
+    // Removing Property from state after remove;
+    useEffect(() => {
+        if (message.slice(0, 7) === "removed") {
+            console.log("removing property");
+            setProperties(
+                properties.filter(
+                    (item) => item._id !== message.slice(7, message.length)
+                )
+            );
+        }
+        dispatch(resetStatus());
+    }, [message]);
     if (loading || error) {
         return (
             <section className="intro-single">
@@ -191,7 +208,17 @@ const MyListings = () => {
                                                 ? "Resume"
                                                 : "Suspend"}
                                         </button>
-                                        <button disabled={actionLoading}>
+                                        <button
+                                            disabled={actionLoading}
+                                            onClick={() => {
+                                                dispatch(
+                                                    removeProperty({
+                                                        propertyId:
+                                                            property._id,
+                                                    })
+                                                );
+                                            }}
+                                        >
                                             Remove
                                         </button>
                                     </div>

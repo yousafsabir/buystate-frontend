@@ -15,6 +15,7 @@ const Api = Object.freeze({
     getFavourites: property + "favourites", // multi function api
     getFavouriteProperties: property + "favouriteproperties",
     setSuspended: property + "suspendorresume",
+    removeProperty: property + "/",
 });
 
 export default Api;
