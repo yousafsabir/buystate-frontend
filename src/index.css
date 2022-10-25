@@ -294,30 +294,26 @@ a:hover {
     gap: 1rem;
 }
 /* Color of buttons */
-.mylistings-cta > button:nth-child(1) {
-    color: var(--green-900);
-    background-color: var(--green-100);
-}
-.mylistings-cta > button:nth-child(1):hover {
-    background-color: var(--green-200);
-}
-.mylistings-cta > button:nth-child(2) {
-    color: var(--yellow-900);
-    background-color: var(--yellow-100);
-}
-.mylistings-cta > button:nth-child(2):hover {
-    background-color: var(--yellow-200);
-}
-.mylistings-cta > button:nth-child(3) {
-    color: var(--red-900);
-    background-color: var(--red-100);
-}
-.mylistings-cta > button:nth-child(3):hover {
-    background-color: var(--red-200);
-}
 .mylistings-cta > button {
     border: none;
     padding: 0.25rem 0.5rem;
+}
+.mylistings-cta > button {
+    color: #000;
+    background-color: #fff;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #000;
+    transition: border-color 300ms ease;
+}
+.mylistings-cta > button:nth-child(1):hover {
+    border-color: #18d26e;
+}
+.mylistings-cta > button:nth-child(2):hover {
+    border-color: #facc15;
+}
+.mylistings-cta > button:nth-child(3):hover {
+    border-color: #dc2626;
 }
 
 /* Suspended Div */
