@@ -16,6 +16,7 @@ const Api = Object.freeze({
     getFavouriteProperties: property + "favouriteproperties",
     setSuspended: property + "suspendorresume",
     removeProperty: property + "/",
+    updateProperty: property + "/",
 });
 
 export default Api;

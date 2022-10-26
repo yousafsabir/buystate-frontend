@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
     setSuspended,
     removeProperty,
+    setEditProperty,
     resetStatus,
 } from "../redux/slices/Property";
 import Api from "../constants/ApiUrls";
@@ -12,6 +13,7 @@ import PropertyCard from "../components/PropertyCard";
 
 const MyListings = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { user } = useSelector((state) => state.auth);
     const { suspends, message } = useSelector((state) => state.property);
     const { loading: actionLoading } = useSelector((state) => state.property);
@@ -189,7 +191,15 @@ const MyListings = () => {
                                         <PropertyCard {...property} />
                                     </div>
                                     <div className="col-md-12 d-flex justify-content-center align-items-center mylistings-cta">
-                                        <button disabled={actionLoading}>
+                                        <button
+                                            disabled={actionLoading}
+                                            onClick={() => {
+                                                dispatch(
+                                                    setEditProperty(property)
+                                                );
+                                                navigate("/listaproperty");
+                                            }}
+                                        >
                                             Update
                                         </button>
                                         <button

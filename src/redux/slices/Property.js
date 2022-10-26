@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import Api from "../../constants/ApiUrls";
 import uploadPhoto from "../../utils/uploadPhoto";
+import deletePhoto from "../../utils/deletePhoto";
 import Toast from "../../utils/Toast";
 
 export const addProperty = createAsyncThunk(
@@ -188,6 +189,48 @@ export const removeProperty = createAsyncThunk(
         }
     }
 );
+export const updateProperty = createAsyncThunk(
+    "property/update",
+    async (args, thunkApi) => {
+        try {
+            let data = { ...args.data };
+            // if user uploads new photo
+            if (args.photo) {
+                // Deleting existing photo
+                await deletePhoto(
+                    thunkApi.getState().property.toBeEditted.imageId
+                );
+                // Uploading New One
+                const { image, imageId } = await uploadPhoto(args.photo);
+                data = { ...data, image, imageId };
+            }
+            const token = thunkApi.getState().auth.user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const res = await axios.put(
+                Api.updateProperty + args.propertyId,
+                data,
+                config
+            );
+            if (res.data.status === 200) {
+                return thunkApi.fulfillWithValue(res.data.message);
+            } else {
+                return thunkApi.rejectWithValue(res.data.message);
+            }
+        } catch (error) {
+            console.log("complete error", error);
+            console.log("error message:", error.message);
+            const message =
+                error.response.data.message ||
+                error.message ||
+                error.toString();
+            thunkApi.rejectWithValue(message);
+        }
+    }
+);
 
 const Property = createSlice({
     name: "property",
@@ -198,6 +241,7 @@ const Property = createSlice({
         success: false,
         error: false,
         editProperty: false,
+        toBeEditted: {},
         message: "",
     },
     reducers: {
@@ -208,8 +252,9 @@ const Property = createSlice({
             state.editProperty = false;
             state.message = "";
         },
-        setEditProperty: (state) => {
+        setEditProperty: (state, action) => {
             state.editProperty = true;
+            state.toBeEditted = action.payload;
         },
     },
     extraReducers: (builder) =>
@@ -285,6 +330,23 @@ const Property = createSlice({
             })
             .addCase(removeProperty.rejected, (state, action) => {
                 state.loading = false;
+                Toast.error(`${action.payload}`);
+            })
+            // Update Property
+            .addCase(updateProperty.pending, (state) => {
+                state.loading = true;
+                Toast.loading("Updating Property");
+            })
+            .addCase(updateProperty.fulfilled, (state) => {
+                state.loading = false;
+                state.success = true;
+                state.message = "updated";
+                Toast.dismiss();
+                Toast.success("Property Successfully Updated");
+            })
+            .addCase(updateProperty.rejected, (state, action) => {
+                state.loading = false;
+                state.error = true;
                 Toast.error(`${action.payload}`);
             }),
 });

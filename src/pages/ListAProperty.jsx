@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProperty, resetStatus } from "../redux/slices/Property";
+import {
+    addProperty,
+    resetStatus,
+    updateProperty,
+} from "../redux/slices/Property";
 
 const ListAProperty = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { loading, success, error, editProperty } = useSelector(
-        (state) => state.property
-    );
+    const { loading, success, error, message, editProperty, toBeEditted } =
+        useSelector((state) => state.property);
 
     const [file, setFile] = useState(undefined);
     const [form, setForm] = useState({
@@ -70,13 +73,47 @@ const ListAProperty = () => {
         }
     }, [loading]);
 
+    // Loading To be Editted Property
+    useEffect(() => {
+        if (editProperty) {
+            setForm({
+                title: toBeEditted.title,
+                location: toBeEditted.location,
+                description: toBeEditted.description,
+                status: toBeEditted.status,
+                type: toBeEditted.type,
+                area: toBeEditted.area,
+                beds: toBeEditted.beds,
+                baths: toBeEditted.baths,
+                garages: toBeEditted.garages,
+                price: toBeEditted.price,
+            });
+        }
+    }, [editProperty]);
+
+    // returning to myProperties on update property
+    useEffect(() => {
+        if (message === "updated") {
+            dispatch(resetStatus());
+            navigate("/mylistings");
+        }
+    }, [message]);
+
     const submit = () => {
-        dispatch(
-            addProperty({
-                data: form,
-                photo: file,
-            })
-        );
+        editProperty
+            ? dispatch(
+                  updateProperty({
+                      propertyId: toBeEditted._id,
+                      data: form,
+                      photo: file ?? null,
+                  })
+              )
+            : dispatch(
+                  addProperty({
+                      data: form,
+                      photo: file,
+                  })
+              );
     };
     return (
         <>
@@ -380,7 +417,6 @@ const ListAProperty = () => {
                                             }
                                             className="form-control form-control-lg form-control-a file-input"
                                             id="formFileLg"
-                                            required
                                         />
                                     </div>
                                 </div>
@@ -388,7 +424,7 @@ const ListAProperty = () => {
                                     <button
                                         type="submit"
                                         className="btn-submit-form"
-                                        disabled={!isValid}
+                                        disabled={!editProperty && !isValid}
                                     >
                                         {editProperty ? "Update" : "List"}
                                     </button>
