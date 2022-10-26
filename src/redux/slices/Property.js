@@ -13,12 +13,6 @@ export const addProperty = createAsyncThunk(
             const { image, imageId } = await uploadPhoto(args.photo);
             // uploading to database
             const userId = thunkApi.getState().auth.user._id;
-            const token = thunkApi.getState().auth.user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
             const res = await axios.post(
                 Api.addProperty,
                 {
@@ -27,7 +21,7 @@ export const addProperty = createAsyncThunk(
                     imageId,
                     userId,
                 },
-                config
+                thunkApi.getState().auth.axiosConfig
             );
             if (res.data.status === 201) {
                 thunkApi.fulfillWithValue(res.data.favourites);
@@ -57,7 +51,11 @@ export const getFavourites = createAsyncThunk(
                     Authorization: `Bearer ${token}`,
                 },
             };
-            const res = await axios.post(Api.getFavourites, {}, config);
+            const res = await axios.post(
+                Api.getFavourites,
+                {},
+                thunkApi.getState().auth.axiosConfig
+            );
             if (res.data.status === 200) {
                 return res.data.favourites;
             } else {
@@ -78,13 +76,11 @@ export const setFavourites = createAsyncThunk(
     "property/setFavourites",
     async (args, thunkApi) => {
         try {
-            const token = thunkApi.getState().auth.user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            const res = await axios.post(Api.getFavourites, args, config);
+            const res = await axios.post(
+                Api.getFavourites,
+                args,
+                thunkApi.getState().auth.axiosConfig
+            );
             if (res.data.status === 200) {
                 return res.data;
             } else {
@@ -107,15 +103,12 @@ export const getSuspends = createAsyncThunk(
         try {
             const user = thunkApi.getState().auth.user;
             if (!user) return []; // As this function runs each time when user value in auth changes
-            // So on logout, it checks and automatically clears the favourites array in property
 
-            const token = user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            const res = await axios.post(Api.setSuspended, {}, config);
+            const res = await axios.post(
+                Api.setSuspended,
+                {},
+                thunkApi.getState().auth.axiosConfig
+            );
             if (res.data.status === 200) {
                 return res.data.suspends;
             } else {
@@ -136,13 +129,11 @@ export const setSuspended = createAsyncThunk(
     "property/setSuspended",
     async (args, thunkApi) => {
         try {
-            const token = thunkApi.getState().auth.user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            const res = await axios.post(Api.setSuspended, args, config);
+            const res = await axios.post(
+                Api.setSuspended,
+                args,
+                thunkApi.getState().auth.axiosConfig
+            );
             if (res.data.status === 200) {
                 return res.data;
             } else {
@@ -163,15 +154,9 @@ export const removeProperty = createAsyncThunk(
     "property/remove",
     async (args, thunkApi) => {
         try {
-            const token = thunkApi.getState().auth.user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
             const res = await axios.delete(
                 Api.removeProperty + args.propertyId,
-                config
+                thunkApi.getState().auth.axiosConfig
             );
             if (res.data.status === 200) {
                 return thunkApi.fulfillWithValue(args.propertyId);
@@ -204,16 +189,10 @@ export const updateProperty = createAsyncThunk(
                 const { image, imageId } = await uploadPhoto(args.photo);
                 data = { ...data, image, imageId };
             }
-            const token = thunkApi.getState().auth.user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
             const res = await axios.put(
                 Api.updateProperty + args.propertyId,
                 data,
-                config
+                thunkApi.getState().auth.axiosConfig
             );
             if (res.data.status === 200) {
                 return thunkApi.fulfillWithValue(res.data.message);

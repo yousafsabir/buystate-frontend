@@ -84,6 +84,13 @@ const Auth = createSlice({
     name: "auth",
     initialState: {
         user: user ?? null,
+        axiosConfig: user
+            ? {
+                  headers: {
+                      Authorization: `Bearer ${user.token}`,
+                  },
+              }
+            : null,
         loading: false,
         success: false,
         error: false,
@@ -111,8 +118,13 @@ const Auth = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
-                Toast.dismiss();
                 state.user = action.payload;
+                state.axiosConfig = {
+                    headers: {
+                        Authorization: `Bearer ${state.user.token}`,
+                    },
+                };
+                Toast.dismiss();
                 Toast.success(`Welcome back ${state.user.fName}`, "😇");
             })
             .addCase(login.rejected, (state, action) => {
@@ -131,6 +143,11 @@ const Auth = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.user = action.payload;
+                state.axiosConfig = {
+                    headers: {
+                        Authorization: `Bearer ${state.user.token}`,
+                    },
+                };
                 Toast.dismiss();
                 Toast.success(`welcome ${state.user.fName}`, "😇");
             })
@@ -149,6 +166,7 @@ const Auth = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.user = null;
+                state.axiosConfig = null;
                 Toast.success("Logged out successfully");
             })
             .addCase(logout.rejected, (state, action) => {
