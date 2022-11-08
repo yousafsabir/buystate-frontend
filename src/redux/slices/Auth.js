@@ -20,13 +20,13 @@ export const login = createAsyncThunk("auth/login", async (args, thunkApi) => {
             return res.data.user;
         } else {
             console.log("Axios Response:", res);
-            return thunkApi.rejectWithValue(res.data.message);
+            throw new Error(res.data.message);
         }
     } catch (error) {
         console.log("complete error", error);
-        console.log("error message:", message);
         const message =
             error.response.data.message || error.message || error.toString();
+        console.log("error message:", message);
         thunkApi.rejectWithValue(message);
     }
 });
@@ -47,14 +47,16 @@ export const register = createAsyncThunk(
             if (res.data) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;
+            } else {
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -70,11 +72,11 @@ export const logout = createAsyncThunk(
             localStorage.removeItem("user");
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }

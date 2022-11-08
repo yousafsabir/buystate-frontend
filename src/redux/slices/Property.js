@@ -25,14 +25,16 @@ export const addProperty = createAsyncThunk(
             );
             if (res.data.status === 201) {
                 thunkApi.fulfillWithValue(res.data.favourites);
+            } else {
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", error.message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -59,7 +61,7 @@ export const getFavourites = createAsyncThunk(
             if (res.data.status === 200) {
                 return res.data.favourites;
             } else {
-                thunkApi.rejectWithValue("an error occoured");
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
@@ -84,15 +86,15 @@ export const setFavourites = createAsyncThunk(
             if (res.data.status === 200) {
                 return res.data;
             } else {
-                thunkApi.rejectWithValue(res.data.message);
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -112,15 +114,15 @@ export const getSuspends = createAsyncThunk(
             if (res.data.status === 200) {
                 return res.data.suspends;
             } else {
-                thunkApi.rejectWithValue("an error occoured");
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -137,15 +139,15 @@ export const setSuspended = createAsyncThunk(
             if (res.data.status === 200) {
                 return res.data;
             } else {
-                return thunkApi.rejectWithValue(res.data.message);
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -161,15 +163,15 @@ export const removeProperty = createAsyncThunk(
             if (res.data.status === 200) {
                 return thunkApi.fulfillWithValue(args.propertyId);
             } else {
-                return thunkApi.rejectWithValue(res.data.message);
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
@@ -197,15 +199,15 @@ export const updateProperty = createAsyncThunk(
             if (res.data.status === 200) {
                 return thunkApi.fulfillWithValue(res.data.message);
             } else {
-                return thunkApi.rejectWithValue(res.data.message);
+                throw new Error(res.data.message);
             }
         } catch (error) {
             console.log("complete error", error);
-            console.log("error message:", error.message);
             const message =
                 error.response.data.message ||
                 error.message ||
                 error.toString();
+            console.log("error message:", message);
             thunkApi.rejectWithValue(message);
         }
     }
