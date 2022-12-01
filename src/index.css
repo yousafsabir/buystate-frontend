@@ -832,18 +832,17 @@ a:hover {
     backface-visibility: hidden;
 }
 
-.navbar-default.navbar-trans .nav-item,
-.navbar-default.navbar-reduce .nav-item {
-    position: relative;
-    padding-right: 10px;
-    padding-bottom: 8px;
-    margin-left: 0;
+.navbar-default.navbar-trans .navbar-nav,
+.navbar-default.navbar-reduce .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media (min-width: 768px) {
-    .navbar-default.navbar-trans .nav-item,
-    .navbar-default.navbar-reduce .nav-item {
-        margin-left: 15px;
+    .navbar-default.navbar-trans .navbar-nav,
+    .navbar-default.navbar-reduce .navbar-nav {
+        gap: 15px;
     }
 }
 
