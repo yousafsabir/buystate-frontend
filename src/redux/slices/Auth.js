@@ -44,7 +44,7 @@ export const register = createAsyncThunk(
                 image,
                 imageId,
             });
-            if (res.data) {
+            if (res.data.status === 200) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;
             } else {
@@ -57,7 +57,7 @@ export const register = createAsyncThunk(
                 error.message ||
                 error.toString();
             console.log("error message:", message);
-            thunkApi.rejectWithValue(message);
+            thunkApi.rejectWithValue(error);
         }
     }
 );
@@ -132,6 +132,7 @@ const Auth = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
+                console.log("payload", action.payload);
                 state.message = action.payload;
                 Toast.dismiss();
                 Toast.error(`${action.payload}`);

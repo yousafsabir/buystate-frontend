@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import isEmpty from "is-empty";
 import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
+import queryParams from "../utils/getQueryParams";
 
 const Properties = () => {
     const { suspends } = useSelector((state) => state.property);
@@ -12,15 +14,27 @@ const Properties = () => {
     const [Page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-
+    const [search, setSearch] = useState(
+        useMemo(() => queryParams(), [window.location.href])
+    );
     const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
     useEffect(() => {
         const unsub = async () => {
+            // Search object
+            let searchObj = { ...search };
+            if (!isEmpty(search.price)) {
+                searchObj.price = { $gte: search.price };
+            }
+            if (!isEmpty(search.area)) {
+                searchObj.area = { $gte: search.area };
+            }
+            console.log(searchObj);
             try {
                 setLoading(true);
                 const res = await axios.post(
                     Api.properties,
                     {
+                        find: searchObj,
                         sort: "descending",
                         page: Page,
                         limit: 9,
@@ -31,13 +45,13 @@ const Properties = () => {
                     setProperties(res.data.properties);
                     setPagination(res.data.pagination);
                     // setPage(res.data.pagination);
-                    setLoading(false);
                 }
             } catch (e) {
                 setError(true);
-                setLoading(false);
                 console.log("message", e.message);
                 console.log("error", e);
+            } finally {
+                setLoading(false);
             }
         };
         unsub();

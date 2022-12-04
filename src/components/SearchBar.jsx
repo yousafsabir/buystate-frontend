@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import isEmpty from "is-empty";
+import { useNavigate } from "react-router-dom";
+import { states, cities } from "../constants/CityAndStates";
+import Form from "../utils/handleForm";
 
 const SearchBar = ({ isOpen, setOpen }) => {
+    const navigate = useNavigate();
+    const [search, setSearch] = useState({
+        status: "",
+        type: "",
+        state: "",
+        city: "",
+        area: "",
+        price: "",
+    });
+    console.log(search);
+    const handleForm = Form(search, setSearch);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        setOpen(false);
+        navigate(
+            `/properties?${
+                !isEmpty(search.status) ? "status=" + search.status + "&" : ""
+            }${!isEmpty(search.type) ? "type=" + search.type + "&" : ""}${
+                !isEmpty(search.state) ? "state=" + search.state + "&" : ""
+            }${!isEmpty(search.city) ? "city=" + search.city + "&" : ""}${
+                !isEmpty(search.area) ? "area=" + search.area + "&" : ""
+            }${!isEmpty(search.price) ? "price=" + search.price : ""}`
+        );
+    };
     return (
         <div className={isOpen ? "box-collapse-open" : "box-collapse-closed"}>
             <div className="click-closed"></div>
@@ -13,9 +41,9 @@ const SearchBar = ({ isOpen, setOpen }) => {
                     onClick={() => setOpen(false)}
                 ></span>
                 <div className="box-collapse-wrap form">
-                    <form className="form-a">
+                    <form className="form-a" onSubmit={onSubmit}>
                         <div className="row">
-                            <div className="col-md-12 mb-2">
+                            {/* <div className="col-md-12 mb-2">
                                 <div className="form-group">
                                     <label className="pb-2" htmlFor="Type">
                                         Keyword
@@ -26,6 +54,23 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                         placeholder="Keyword"
                                     />
                                 </div>
+                            </div> */}
+                            <div className="col-md-6 mb-2">
+                                <div className="form-group mt-3">
+                                    <label className="pb-2" htmlFor="status">
+                                        Status
+                                    </label>
+                                    <select
+                                        className="form-control form-select form-control-a"
+                                        id="status"
+                                        name="status"
+                                        onChange={handleForm}
+                                    >
+                                        <option value={""}>Both</option>
+                                        <option value={"rent"}>For Rent</option>
+                                        <option value={"sale"}>For Sale</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className="col-md-6 mb-2">
                                 <div className="form-group mt-3">
@@ -35,11 +80,44 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                     <select
                                         className="form-control form-select form-control-a"
                                         id="Type"
+                                        name="type"
+                                        onChange={handleForm}
                                     >
-                                        <option>All Type</option>
-                                        <option>For Rent</option>
-                                        <option>For Sale</option>
-                                        <option>Open House</option>
+                                        <option value={""}>All Types</option>
+                                        <option value={"apartment"}>
+                                            Apartment
+                                        </option>
+                                        <option value={"villa"}>Villa</option>
+                                        <option value={"studio"}>Studio</option>
+                                        <option value={"town house"}>
+                                            Town House
+                                        </option>
+                                        <option value={"twin house"}>
+                                            Twin House
+                                        </option>
+                                        <option value={"chalet"}>Chalet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6 mb-2">
+                                <div className="form-group mt-3">
+                                    <label className="pb-2" htmlFor="state">
+                                        State
+                                    </label>
+                                    <select
+                                        className="form-control form-select form-control-a"
+                                        id="state"
+                                        name="state"
+                                        onChange={handleForm}
+                                    >
+                                        <option value={""}>All States</option>
+                                        {states.map((state) => {
+                                            return (
+                                                <option value={state}>
+                                                    {state}
+                                                </option>
+                                            );
+                                        })}
                                     </select>
                                 </div>
                             </div>
@@ -51,16 +129,43 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                     <select
                                         className="form-control form-select form-control-a"
                                         id="city"
+                                        name="city"
+                                        onChange={handleForm}
                                     >
-                                        <option>All City</option>
-                                        <option>Alabama</option>
-                                        <option>Arizona</option>
-                                        <option>California</option>
-                                        <option>Colorado</option>
+                                        <option value={""}>All Cities</option>
+                                        {!Boolean(search.state) && (
+                                            <option value={""}>
+                                                Select a state for its cities
+                                            </option>
+                                        )}
+                                        {Boolean(search.state) &&
+                                            cities[search.state]?.map(
+                                                (city) => {
+                                                    return (
+                                                        <option value={city}>
+                                                            {city}
+                                                        </option>
+                                                    );
+                                                }
+                                            )}
                                     </select>
                                 </div>
                             </div>
                             <div className="col-md-6 mb-2">
+                                <div className="form-group mt-3">
+                                    <label className="pb-2" htmlFor="area">
+                                        Minimum Area (m<sup>2</sup>)
+                                    </label>
+                                    <input
+                                        id="area"
+                                        type="number"
+                                        name="area"
+                                        className="form-control form-control-md form-control-a"
+                                        onChange={handleForm}
+                                    />
+                                </div>
+                            </div>
+                            {/* <div className="col-md-6 mb-2">
                                 <div className="form-group mt-3">
                                     <label className="pb-2" htmlFor="bedrooms">
                                         Bedrooms
@@ -108,22 +213,19 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                         <option>03</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="col-md-6 mb-2">
                                 <div className="form-group mt-3">
                                     <label className="pb-2" htmlFor="price">
-                                        Min Price
+                                        Minimum Price (Rs)
                                     </label>
-                                    <select
-                                        className="form-control form-select form-control-a"
+                                    <input
                                         id="price"
-                                    >
-                                        <option>Unlimite</option>
-                                        <option>$50,000</option>
-                                        <option>$100,000</option>
-                                        <option>$150,000</option>
-                                        <option>$200,000</option>
-                                    </select>
+                                        type="number"
+                                        name="price"
+                                        className="form-control form-control-md form-control-a"
+                                        onChange={handleForm}
+                                    />
                                 </div>
                             </div>
                             <div className="col-md-12">

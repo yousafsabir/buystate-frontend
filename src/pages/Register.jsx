@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import empty from "is-empty";
-import Camera from "../assets/img/camera.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Form from "../utils/handleForm";
+import Camera from "../assets/img/camera.jpg";
 import { register, resetStatus } from "../redux/slices/Auth";
 
 const Register = () => {
@@ -20,6 +21,7 @@ const Register = () => {
         password: "",
     });
     const { fName, lName, userName, phone, email, password } = form;
+    const handleForm = Form(form, setForm);
 
     const [photo, setPhoto] = useState({});
 
@@ -99,13 +101,7 @@ const Register = () => {
                                             type="text"
                                             name="fName"
                                             value={fName}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="First Name"
                                             required
@@ -117,13 +113,7 @@ const Register = () => {
                                         <input
                                             name="lName"
                                             value={lName}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             type="text"
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="Last Name"
@@ -137,13 +127,7 @@ const Register = () => {
                                             type="text"
                                             name="userName"
                                             value={userName}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="Username"
                                             required
@@ -155,13 +139,7 @@ const Register = () => {
                                         <input
                                             name="phone"
                                             value={phone}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             type="text"
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="Your Phone Number"
@@ -175,13 +153,7 @@ const Register = () => {
                                             type="email"
                                             name="email"
                                             value={email}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="Your Email"
                                             required
@@ -194,13 +166,7 @@ const Register = () => {
                                             name="password"
                                             type="password"
                                             value={password}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="Set Password"
                                             required

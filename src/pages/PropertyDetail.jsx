@@ -201,6 +201,16 @@ const PropertyDetail = () => {
                                                     </span>
                                                 </li>
                                                 <li className="d-flex justify-content-between">
+                                                    <strong>City:</strong>
+                                                    <span>{property.city}</span>
+                                                </li>
+                                                <li className="d-flex justify-content-between">
+                                                    <strong>Province:</strong>
+                                                    <span>
+                                                        {property.state}
+                                                    </span>
+                                                </li>
+                                                <li className="d-flex justify-content-between">
                                                     <strong>
                                                         Property Type:
                                                     </strong>

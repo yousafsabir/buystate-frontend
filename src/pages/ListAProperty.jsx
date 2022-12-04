@@ -17,6 +17,8 @@ const ListAProperty = () => {
     const [form, setForm] = useState({
         title: "",
         location: "",
+        city: "",
+        state: "",
         description: "",
         status: "",
         type: "",
@@ -29,6 +31,8 @@ const ListAProperty = () => {
     const {
         title,
         location,
+        city,
+        state,
         description,
         status,
         type,
@@ -52,7 +56,7 @@ const ListAProperty = () => {
             price &&
             file
     );
-
+    console.log(form);
     // Clearing the form on success
     useEffect(() => {
         if (!loading && success) {
@@ -179,6 +183,52 @@ const ListAProperty = () => {
                                             type="text"
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. West Canal Road, Abdullahpur ..."
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="city" className="pb-2">
+                                            City
+                                        </label>
+                                        <input
+                                            name="city"
+                                            value={city}
+                                            id="city"
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            type="text"
+                                            className="form-control form-control-lg form-control-a"
+                                            placeholder="e.g. Faisalabad"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-sm-12 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="state" className="pb-2">
+                                            State
+                                        </label>
+                                        <input
+                                            name="state"
+                                            value={state}
+                                            id="state"
+                                            onChange={(e) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                            type="text"
+                                            className="form-control form-control-lg form-control-a"
+                                            placeholder="e.g. Punjab"
                                             required
                                         />
                                     </div>
