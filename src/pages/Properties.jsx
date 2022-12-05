@@ -14,10 +14,7 @@ const Properties = () => {
     const [Page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [search, setSearch] = useState(
-        useMemo(() => queryParams(), [window.location.href])
-    );
-    const apiUrl = process.env.REACT_APP_API_URL + "api/properties/get";
+    const [search, setSearch] = useState(queryParams());
     useEffect(() => {
         const unsub = async () => {
             // Search object
