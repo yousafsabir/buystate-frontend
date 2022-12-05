@@ -41,21 +41,21 @@ const Home = () => {
                                         <div className="col-lg-8">
                                             <div className="intro-body">
                                                 <p className="intro-title-top">
-                                                    Doral, Florida
+                                                    Faisalabad, Punjab
                                                     <br /> 78345
                                                 </p>
                                                 <h1 className="intro-title mb-4 ">
                                                     <span className="color-b">
-                                                        204{" "}
-                                                    </span>{" "}
-                                                    Mount
-                                                    <br /> Olive Road Two
+                                                        204&nbsp;
+                                                    </span>
+                                                    &nbsp; Citi
+                                                    <br />
+                                                    Housing
                                                 </h1>
                                                 <p className="intro-subtitle intro-price">
                                                     <Link to="/">
                                                         <span className="price-a">
-                                                            rent | Rs Rs
-                                                            12000000
+                                                            rent | Rs 50000
                                                         </span>
                                                     </Link>
                                                 </p>
@@ -80,21 +80,21 @@ const Home = () => {
                                         <div className="col-lg-8">
                                             <div className="intro-body">
                                                 <p className="intro-title-top">
-                                                    Doral, Florida
-                                                    <br /> 78345
+                                                    Islamabad
+                                                    <br /> 59274
                                                 </p>
                                                 <h1 className="intro-title mb-4">
                                                     <span className="color-b">
                                                         204{" "}
                                                     </span>{" "}
-                                                    Rino
-                                                    <br /> Venda Road Five
+                                                    Zone
+                                                    <br />
+                                                    4, State
                                                 </h1>
                                                 <p className="intro-subtitle intro-price">
                                                     <a href="/">
                                                         <span className="price-a">
-                                                            rent | Rs Rs
-                                                            12000000
+                                                            rent | Rs 100000
                                                         </span>
                                                     </a>
                                                 </p>
@@ -119,21 +119,21 @@ const Home = () => {
                                         <div className="col-lg-8">
                                             <div className="intro-body">
                                                 <p className="intro-title-top">
-                                                    Doral, Florida
-                                                    <br /> 78345
+                                                    Quetta, Balochistan
+                                                    <br /> 43872
                                                 </p>
                                                 <h1 className="intro-title mb-4">
                                                     <span className="color-b">
                                                         204{" "}
                                                     </span>{" "}
-                                                    Alira
-                                                    <br /> Roan Road One
+                                                    Defence
+                                                    <br />
+                                                    Housing
                                                 </h1>
                                                 <p className="intro-subtitle intro-price">
                                                     <a href="/">
                                                         <span className="price-a">
-                                                            rent | Rs Rs
-                                                            12000000
+                                                            sale | Rs 12000000
                                                         </span>
                                                     </a>
                                                 </p>

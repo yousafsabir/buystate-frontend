@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +15,8 @@ const ListAProperty = () => {
     const { loading, success, error, message, editProperty, toBeEditted } =
         useSelector((state) => state.property);
 
-    const [file, setFile] = useState(undefined);
+    const [file, setFile] = useState(null);
+    const fileRef = useRef();
     const [form, setForm] = useState({
         title: "",
         location: "",
@@ -62,18 +63,7 @@ const ListAProperty = () => {
     // Clearing the form on success
     useEffect(() => {
         if (!loading && success) {
-            setForm({
-                title: "",
-                location: "",
-                description: "",
-                status: "",
-                type: "",
-                area: null,
-                beds: null,
-                baths: null,
-                garages: null,
-                price: null,
-            });
+            resetForm();
             dispatch(resetStatus());
             // navigate("/myproperties");
         }
@@ -85,6 +75,8 @@ const ListAProperty = () => {
             setForm({
                 title: toBeEditted.title,
                 location: toBeEditted.location,
+                state: toBeEditted.state,
+                city: toBeEditted.city,
                 description: toBeEditted.description,
                 status: toBeEditted.status,
                 type: toBeEditted.type,
@@ -104,6 +96,25 @@ const ListAProperty = () => {
             navigate("/mylistings");
         }
     }, [message]);
+
+    const resetForm = () => {
+        setForm({
+            title: "",
+            location: "",
+            city: "",
+            state: "",
+            description: "",
+            status: "",
+            type: "",
+            area: "",
+            beds: "",
+            baths: "",
+            garages: "",
+            price: "",
+        });
+        setFile(null);
+        fileRef.current.value = null;
+    };
 
     const submit = () => {
         editProperty
@@ -178,27 +189,6 @@ const ListAProperty = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-sm-12 mb-3">
-                                    {/* <div className="form-group">
-                                        <label htmlFor="city" className="pb-2">
-                                            City
-                                        </label>
-                                        <input
-                                            name="city"
-                                            value={city}
-                                            id="city"
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
-                                            type="text"
-                                            className="form-control form-control-lg form-control-a"
-                                            placeholder="e.g. Faisalabad"
-                                            required
-                                        />                                       
-                                    </div> */}
                                     <div className="form-group">
                                         <label className="pb-2" htmlFor="state">
                                             State
@@ -207,18 +197,18 @@ const ListAProperty = () => {
                                             className="form-control form-select form-control-a"
                                             id="state"
                                             name="state"
+                                            value={state}
                                             onChange={handleForm}
                                         >
-                                            <option
-                                                value=""
-                                                className="text-a"
-                                                selected
-                                            >
+                                            <option value="" className="text-a">
                                                 Select State
                                             </option>
-                                            {states.map((state) => {
+                                            {states.map((state, i) => {
                                                 return (
-                                                    <option value={state}>
+                                                    <option
+                                                        value={state}
+                                                        key={i}
+                                                    >
                                                         {state}
                                                     </option>
                                                 );
@@ -228,25 +218,6 @@ const ListAProperty = () => {
                                 </div>
                                 <div className="col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
-                                        {/* <label htmlFor="state" className="pb-2">
-                                            State
-                                        </label>
-                                        <input
-                                            name="state"
-                                            value={state}
-                                            id="state"
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
-                                            type="text"
-                                            className="form-control form-control-lg form-control-a"
-                                            placeholder="e.g. Punjab"
-                                            required
-                                        /> */}
                                         <label className="pb-2" htmlFor="city">
                                             City
                                         </label>
@@ -255,6 +226,7 @@ const ListAProperty = () => {
                                             id="city"
                                             name="city"
                                             onChange={handleForm}
+                                            value={city}
                                         >
                                             {!Boolean(form.state) && (
                                                 <option
@@ -267,10 +239,11 @@ const ListAProperty = () => {
                                             )}
                                             {Boolean(form.state) &&
                                                 cities[form.state]?.map(
-                                                    (city) => {
+                                                    (city, i) => {
                                                         return (
                                                             <option
                                                                 value={city}
+                                                                key={i}
                                                             >
                                                                 {city}
                                                             </option>
@@ -313,6 +286,7 @@ const ListAProperty = () => {
                                             className="form-control form-select form-control-a"
                                             id="status"
                                             name="status"
+                                            value={status}
                                             onChange={handleForm}
                                             required
                                         >
@@ -340,6 +314,7 @@ const ListAProperty = () => {
                                             className="form-control form-select form-control-a"
                                             id="type"
                                             name="type"
+                                            value={type}
                                             onChange={handleForm}
                                             required
                                         >
@@ -464,6 +439,7 @@ const ListAProperty = () => {
                                             onChange={(e) =>
                                                 setFile(e.target.files[0])
                                             }
+                                            ref={fileRef}
                                             className="form-control form-control-lg form-control-a file-input"
                                             id="formFileLg"
                                         />
