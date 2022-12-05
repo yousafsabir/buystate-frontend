@@ -334,6 +334,36 @@ a:hover {
     max-width: 200px;
 }
 
+/* Property Filter  */
+.property-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+.property-filter > * {
+    margin: 0;
+}
+.property-filter > p {
+    font-size: 1.125rem;
+    color: #313131;
+}
+.property-filter > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.property-filter .filter-tag {
+    padding: 5px;
+    border: 2px solid #313131;
+    background-color: #e9e9ed;
+}
+.property-filter .filter-tag p {
+    margin: 0;
+    color: #313131;
+    font-size: 1rem;
+}
+
 /*------/ Bg Image /------*/
 .bg-image {
     background-repeat: no-repeat;
@@ -1661,7 +1691,6 @@ a:hover {
 
 /*------/ Property Grid /-----*/
 .property-grid .grid-option {
-    text-align: right;
     margin-bottom: 2rem;
 }
 

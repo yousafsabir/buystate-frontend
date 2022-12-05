@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import isEmpty from "is-empty";
 import Api from "../constants/ApiUrls";
 import PropertyCard from "../components/PropertyCard";
 import queryParams from "../utils/getQueryParams";
+import PropertyFilter from "../components/PropertyFilter";
 
 const Properties = () => {
     const { suspends } = useSelector((state) => state.property);
+    const url = useLocation();
     const [properties, setProperties] = useState([]);
     const [pagination, setPagination] = useState({});
     const [Page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [search, setSearch] = useState(queryParams());
+    useEffect(() => {
+        setSearch(queryParams());
+    }, [url]);
     useEffect(() => {
         const unsub = async () => {
             // Search object
@@ -25,7 +30,6 @@ const Properties = () => {
             if (!isEmpty(search.area)) {
                 searchObj.area = { $gte: search.area };
             }
-            console.log(searchObj);
             try {
                 setLoading(true);
                 const res = await axios.post(
@@ -41,7 +45,6 @@ const Properties = () => {
                 if (res.data.status === 200) {
                     setProperties(res.data.properties);
                     setPagination(res.data.pagination);
-                    // setPage(res.data.pagination);
                 }
             } catch (e) {
                 setError(true);
@@ -53,7 +56,7 @@ const Properties = () => {
         };
         unsub();
         return unsub;
-    }, [Page]);
+    }, [Page, search]);
     if (loading || error) {
         return (
             <section className="intro-single">
@@ -154,18 +157,7 @@ const Properties = () => {
             <section className="property-grid grid">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-12">
-                            <div className="grid-option">
-                                <form>
-                                    <select className="custom-select">
-                                        <option defaultChecked>All</option>
-                                        <option value="1">New to Old</option>
-                                        <option value="2">For Rent</option>
-                                        <option value="3">For Sale</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
+                        <PropertyFilter searchParams={search} />
                         {/* {properties?.map((property) => {
                             return (
                                 <div className="col-md-4" key={property._id}>
@@ -184,6 +176,14 @@ const Properties = () => {
                                     </div>
                                 );
                         })}
+                        {properties.length === 0 && (
+                            <div
+                                className="col-md-12 d-flex justify-content-center align-items-center"
+                                style={{ height: "300px" }}
+                            >
+                                <p>No Property Found</p>
+                            </div>
+                        )}
                     </div>
 
                     {/* ---------- */}

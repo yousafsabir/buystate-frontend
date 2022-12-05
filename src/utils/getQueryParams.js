@@ -4,7 +4,6 @@ const queryParams = () => {
     for (const [key, value] of paramsObj) {
         newObj[key] = value;
     }
-    console.log("here in query");
     return newObj;
 };
 

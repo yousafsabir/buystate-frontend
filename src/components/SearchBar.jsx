@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import isEmpty from "is-empty";
 import { useNavigate } from "react-router-dom";
 import { states, cities } from "../constants/CityAndStates";
@@ -14,8 +14,12 @@ const SearchBar = ({ isOpen, setOpen }) => {
         area: "",
         price: "",
     });
-    console.log(search);
     const handleForm = Form(search, setSearch);
+    useEffect(() => {
+        if (search.state === "") {
+            setSearch({ ...search, city: "" });
+        }
+    }, [search.state]);
     const onSubmit = (e) => {
         e.preventDefault();
         setOpen(false);

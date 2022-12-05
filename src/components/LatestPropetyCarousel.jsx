@@ -94,7 +94,7 @@ const LatestPropetyCarousel = () => {
                             </div>
                             <div className="title-link">
                                 <Link to="/properties">
-                                    All Property
+                                    All Properties
                                     <span className="bi bi-chevron-right"></span>
                                 </Link>
                             </div>
