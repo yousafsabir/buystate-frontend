@@ -6,6 +6,8 @@ import {
     resetStatus,
     updateProperty,
 } from "../redux/slices/Property";
+import { cities, states } from "../constants/CityAndStates";
+import Form from "../utils/handleForm";
 
 const ListAProperty = () => {
     const navigate = useNavigate();
@@ -22,12 +24,13 @@ const ListAProperty = () => {
         description: "",
         status: "",
         type: "",
-        area: null,
-        beds: null,
-        baths: null,
-        garages: null,
-        price: null,
+        area: "",
+        beds: "",
+        baths: "",
+        garages: "",
+        price: "",
     });
+    const handleForm = Form(form, setForm);
     const {
         title,
         location,
@@ -56,7 +59,6 @@ const ListAProperty = () => {
             price &&
             file
     );
-    console.log(form);
     // Clearing the form on success
     useEffect(() => {
         if (!loading && success) {
@@ -148,13 +150,7 @@ const ListAProperty = () => {
                                             name="title"
                                             id="title"
                                             value={title}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. Beautiful House"
                                             required
@@ -173,13 +169,7 @@ const ListAProperty = () => {
                                             name="location"
                                             value={location}
                                             id="location"
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             type="text"
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. West Canal Road, Abdullahpur ..."
@@ -188,7 +178,7 @@ const ListAProperty = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-sm-12 mb-3">
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <label htmlFor="city" className="pb-2">
                                             City
                                         </label>
@@ -207,12 +197,38 @@ const ListAProperty = () => {
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. Faisalabad"
                                             required
-                                        />
+                                        />                                       
+                                    </div> */}
+                                    <div className="form-group">
+                                        <label className="pb-2" htmlFor="state">
+                                            State
+                                        </label>
+                                        <select
+                                            className="form-control form-select form-control-a"
+                                            id="state"
+                                            name="state"
+                                            onChange={handleForm}
+                                        >
+                                            <option
+                                                value=""
+                                                className="text-a"
+                                                selected
+                                            >
+                                                Select State
+                                            </option>
+                                            {states.map((state) => {
+                                                return (
+                                                    <option value={state}>
+                                                        {state}
+                                                    </option>
+                                                );
+                                            })}
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-sm-12 mb-3">
                                     <div className="form-group">
-                                        <label htmlFor="state" className="pb-2">
+                                        {/* <label htmlFor="state" className="pb-2">
                                             State
                                         </label>
                                         <input
@@ -230,7 +246,38 @@ const ListAProperty = () => {
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. Punjab"
                                             required
-                                        />
+                                        /> */}
+                                        <label className="pb-2" htmlFor="city">
+                                            City
+                                        </label>
+                                        <select
+                                            className="form-control form-select form-control-a"
+                                            id="city"
+                                            name="city"
+                                            onChange={handleForm}
+                                        >
+                                            {!Boolean(form.state) && (
+                                                <option
+                                                    value={""}
+                                                    className="text-a"
+                                                >
+                                                    Select a state for its
+                                                    cities
+                                                </option>
+                                            )}
+                                            {Boolean(form.state) &&
+                                                cities[form.state]?.map(
+                                                    (city) => {
+                                                        return (
+                                                            <option
+                                                                value={city}
+                                                            >
+                                                                {city}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-3">
@@ -246,13 +293,7 @@ const ListAProperty = () => {
                                             id="description"
                                             className="form-control"
                                             value={description}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             cols="45"
                                             rows="5"
                                             placeholder="Message"
@@ -272,13 +313,7 @@ const ListAProperty = () => {
                                             className="form-control form-select form-control-a"
                                             id="status"
                                             name="status"
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             required
                                         >
                                             <option
@@ -305,13 +340,7 @@ const ListAProperty = () => {
                                             className="form-control form-select form-control-a"
                                             id="type"
                                             name="type"
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             required
                                         >
                                             <option
@@ -329,10 +358,10 @@ const ListAProperty = () => {
                                             <option value={"studio"}>
                                                 Studio
                                             </option>
-                                            <option value={"townhouse"}>
-                                                Townhouse
+                                            <option value={"town house"}>
+                                                Town House
                                             </option>
-                                            <option value={"twinHouse"}>
+                                            <option value={"twin house"}>
                                                 Twin House
                                             </option>
                                             <option value={"chalet"}>
@@ -349,13 +378,7 @@ const ListAProperty = () => {
                                         <input
                                             name="area"
                                             value={area}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             type="number"
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 400"
@@ -372,13 +395,7 @@ const ListAProperty = () => {
                                             type="number"
                                             name="beds"
                                             value={beds}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 4"
                                             required
@@ -394,13 +411,7 @@ const ListAProperty = () => {
                                             name="baths"
                                             type="number"
                                             value={baths}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 4"
                                             required
@@ -419,13 +430,7 @@ const ListAProperty = () => {
                                             name="garages"
                                             type="number"
                                             value={garages}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 1"
                                             required
@@ -441,13 +446,7 @@ const ListAProperty = () => {
                                             name="price"
                                             type="number"
                                             value={price}
-                                            onChange={(e) =>
-                                                setForm((prev) => ({
-                                                    ...prev,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                }))
-                                            }
+                                            onChange={handleForm}
                                             className="form-control form-control-lg form-control-a"
                                             placeholder="e.g. 2000000"
                                             required
