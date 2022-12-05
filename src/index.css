@@ -843,7 +843,7 @@ a:hover {
 @media (min-width: 768px) {
     .navbar-default.navbar-trans .navbar-nav,
     .navbar-default.navbar-reduce .navbar-nav {
-        gap: 15px;
+        gap: 25px;
     }
 }
 
