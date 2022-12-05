@@ -48,11 +48,6 @@ export const getFavourites = createAsyncThunk(
             // So on logout, it checks and automatically clears the favourites array in property
 
             const token = user.token;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            };
             const res = await axios.post(
                 Api.getFavourites,
                 {},
