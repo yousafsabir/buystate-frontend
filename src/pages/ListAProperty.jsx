@@ -46,6 +46,12 @@ const ListAProperty = () => {
         garages,
         price,
     } = form;
+    // Setting first city in the list after a state is selected
+    // useEffect(() => {
+    //     if (form.state) {
+    //         setForm({ ...form, city: cities[form.state][0] });
+    //     }
+    // }, [form.state]);
     // Check if the use have attempted all fields
     const isValid = Boolean(
         title &&
@@ -63,11 +69,14 @@ const ListAProperty = () => {
     // Clearing the form on success
     useEffect(() => {
         if (!loading && success) {
-            resetForm();
-            dispatch(resetStatus());
-            // navigate("/myproperties");
+            ResetForm();
         }
     }, [loading]);
+    // Clearing the form on cancel update
+    const ResetForm = () => {
+        resetForm();
+        dispatch(resetStatus());
+    };
 
     // Loading To be Editted Property
     useEffect(() => {
@@ -80,11 +89,11 @@ const ListAProperty = () => {
                 description: toBeEditted.description,
                 status: toBeEditted.status,
                 type: toBeEditted.type,
-                area: toBeEditted.area,
-                beds: toBeEditted.beds,
-                baths: toBeEditted.baths,
-                garages: toBeEditted.garages,
-                price: toBeEditted.price,
+                area: toBeEditted.area.toString(),
+                beds: toBeEditted.beds.toString(),
+                baths: toBeEditted.baths.toString(),
+                garages: toBeEditted.garages.toString(),
+                price: toBeEditted.price.toString(),
             });
         }
     }, [editProperty]);
@@ -235,6 +244,15 @@ const ListAProperty = () => {
                                                 >
                                                     Select a state for its
                                                     cities
+                                                </option>
+                                            )}
+                                            {Boolean(form.state) && (
+                                                <option
+                                                    value={""}
+                                                    className="text-a"
+                                                >
+                                                    Select a city in{" "}
+                                                    {form.state}
                                                 </option>
                                             )}
                                             {Boolean(form.state) &&
@@ -446,6 +464,14 @@ const ListAProperty = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-12 d-flex justify-content-center mb-3">
+                                    {editProperty && (
+                                        <button
+                                            className="btn-submit-form me-5"
+                                            onClick={() => ResetForm()}
+                                        >
+                                            Cancel
+                                        </button>
+                                    )}
                                     <button
                                         type="submit"
                                         className="btn-submit-form"

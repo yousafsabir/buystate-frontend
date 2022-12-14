@@ -227,6 +227,7 @@ const Property = createSlice({
             state.success = false;
             state.error = false;
             state.editProperty = false;
+            state.toBeEditted = {};
             state.message = "";
         },
         setEditProperty: (state, action) => {

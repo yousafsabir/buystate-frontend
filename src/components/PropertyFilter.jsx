@@ -10,9 +10,9 @@ const PropertyFilter = ({ searchParams }) => {
                         <p>Showing results for</p>
                         <div>
                             {Object.entries(searchParams).map(
-                                ([key, value]) => {
+                                ([key, value], i) => {
                                     return (
-                                        <div className="filter-tag">
+                                        <div className="filter-tag" key={i}>
                                             {key === "price" ? (
                                                 <p>Rs.{value}</p>
                                             ) : key === "area" ? (

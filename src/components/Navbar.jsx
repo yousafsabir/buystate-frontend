@@ -70,7 +70,7 @@ const Navbar = (props) => {
 
                         <li className="nav-item">
                             <Link
-                                to={"/properties?query=false&search=true"}
+                                to={"/properties"}
                                 className={
                                     path === "/properties"
                                         ? "nav-link active"
