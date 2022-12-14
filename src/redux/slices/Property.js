@@ -44,15 +44,16 @@ export const getFavourites = createAsyncThunk(
     async (args, thunkApi) => {
         try {
             const user = thunkApi.getState().auth.user;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
             if (!user) return []; // As this function runs each time when user value in auth changes
             // So on logout, it checks and automatically clears the favourites array in property
 
             const token = user.token;
-            const res = await axios.post(
-                Api.getFavourites,
-                {},
-                thunkApi.getState().auth.axiosConfig
-            );
+            const res = await axios.post(Api.getFavourites, {}, config);
             if (res.data.status === 200) {
                 return res.data.favourites;
             } else {
@@ -99,13 +100,14 @@ export const getSuspends = createAsyncThunk(
     async (args, thunkApi) => {
         try {
             const user = thunkApi.getState().auth.user;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
             if (!user) return []; // As this function runs each time when user value in auth changes
 
-            const res = await axios.post(
-                Api.setSuspended,
-                {},
-                thunkApi.getState().auth.axiosConfig
-            );
+            const res = await axios.post(Api.setSuspended, {}, config);
             if (res.data.status === 200) {
                 return res.data.suspends;
             } else {
@@ -125,12 +127,14 @@ export const getSuspends = createAsyncThunk(
 export const setSuspended = createAsyncThunk(
     "property/setSuspended",
     async (args, thunkApi) => {
+        const user = thunkApi.getState().auth.user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
         try {
-            const res = await axios.post(
-                Api.setSuspended,
-                args,
-                thunkApi.getState().auth.axiosConfig
-            );
+            const res = await axios.post(Api.setSuspended, args, config);
             if (res.data.status === 200) {
                 return res.data;
             } else {

@@ -19,7 +19,9 @@ const LatestPropetyCarousel = () => {
             try {
                 setLoading(true);
                 const res = await axios.post(Api.properties, {
+                    find: {},
                     sort: "descending",
+                    page: 1,
                     limit: 4,
                 });
                 if (res.data.status === 200) {
@@ -29,7 +31,7 @@ const LatestPropetyCarousel = () => {
             } catch (e) {
                 setError(true);
                 setLoading(false);
-                console.log("message", e.message);
+                console.log("message", e?.message);
                 console.log("error", e);
             }
         };
@@ -129,8 +131,8 @@ const LatestPropetyCarousel = () => {
                     }}
                 >
                     {properties?.map((property) => {
-                        if (!suspends.includes(property._id)) {
-                            if (!suspends.includes(property._id)) {
+                        if (!suspends?.includes(property._id)) {
+                            if (!suspends?.includes(property._id)) {
                                 return (
                                     <SwiperSlide key={property._id}>
                                         <div className="carousel-item-b swiper-slide">

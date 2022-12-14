@@ -166,7 +166,7 @@ const Properties = () => {
                             );
                         })} */}
                         {properties?.map((property) => {
-                            if (!suspends.includes(property._id))
+                            if (!suspends?.includes(property._id))
                                 return (
                                     <div
                                         className="col-md-4"

@@ -115,9 +115,9 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                         onChange={handleForm}
                                     >
                                         <option value={""}>All States</option>
-                                        {states.map((state) => {
+                                        {states.map((state, i) => {
                                             return (
-                                                <option value={state}>
+                                                <option value={state} key={i}>
                                                     {state}
                                                 </option>
                                             );
@@ -144,9 +144,12 @@ const SearchBar = ({ isOpen, setOpen }) => {
                                         )}
                                         {Boolean(search.state) &&
                                             cities[search.state]?.map(
-                                                (city) => {
+                                                (city, i) => {
                                                     return (
-                                                        <option value={city}>
+                                                        <option
+                                                            value={city}
+                                                            key={i}
+                                                        >
                                                             {city}
                                                         </option>
                                                     );

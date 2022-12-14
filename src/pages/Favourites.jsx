@@ -22,6 +22,7 @@ const Favourites = () => {
                 const res = await axios.post(
                     Api.getFavouriteProperties,
                     {
+                        find: {},
                         sort: "descending",
                         page: Page,
                         limit: 9,

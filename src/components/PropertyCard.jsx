@@ -22,7 +22,7 @@ const PropertyCard = ({
     const [suspended, setSuspended] = useState(false);
 
     useEffect(() => {
-        if (suspends.includes(_id)) {
+        if (suspends?.includes(_id)) {
             setSuspended(true);
         } else {
             setSuspended(false);

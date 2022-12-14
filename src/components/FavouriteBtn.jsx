@@ -13,7 +13,7 @@ const FavouriteBtn = ({
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     const { favourites, loading } = useSelector((state) => state.property);
-    const favourite = favourites.includes(id);
+    const favourite = favourites?.includes(id);
     // returning boolean to property card for button's positioning
     setFavourite(favourite);
 
