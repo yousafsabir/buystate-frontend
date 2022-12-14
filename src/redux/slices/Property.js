@@ -42,17 +42,15 @@ export const addProperty = createAsyncThunk(
 export const getFavourites = createAsyncThunk(
     "property/getFavourites",
     async (args, thunkApi) => {
+        if (!user) return []; // As this function runs each time when user value in auth changes
+        // So on logout, it checks and automatically clears the favourites array in property
+        const user = thunkApi.getState().auth.user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
         try {
-            const user = thunkApi.getState().auth.user;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            if (!user) return []; // As this function runs each time when user value in auth changes
-            // So on logout, it checks and automatically clears the favourites array in property
-
-            const token = user.token;
             const res = await axios.post(Api.getFavourites, {}, config);
             if (res.data.status === 200) {
                 return res.data.favourites;
@@ -98,15 +96,14 @@ export const setFavourites = createAsyncThunk(
 export const getSuspends = createAsyncThunk(
     "property/getSuspends",
     async (args, thunkApi) => {
+        if (!user) return []; // As this function runs each time when user value in auth changes
+        const user = thunkApi.getState().auth.user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
         try {
-            const user = thunkApi.getState().auth.user;
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            if (!user) return []; // As this function runs each time when user value in auth changes
-
             const res = await axios.post(Api.setSuspended, {}, config);
             if (res.data.status === 200) {
                 return res.data.suspends;

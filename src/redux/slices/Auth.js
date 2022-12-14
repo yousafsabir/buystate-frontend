@@ -170,6 +170,7 @@ const Auth = createSlice({
                 state.success = true;
                 state.user = null;
                 state.axiosConfig = null;
+                Toast.dismiss();
                 Toast.success("Logged out successfully");
             })
             .addCase(logout.rejected, (state, action) => {

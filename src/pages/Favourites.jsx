@@ -33,7 +33,6 @@ const Favourites = () => {
                         },
                     }
                 );
-                console.log(res);
                 if (res.data.status === 200) {
                     setProperties(res.data.properties);
                     setPagination(res.data.pagination);

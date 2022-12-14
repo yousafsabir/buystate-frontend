@@ -20,11 +20,9 @@ const PropertyDetail = () => {
             try {
                 setLoading(true);
                 const res = await axios.post(apiUrl);
-                console.log(res);
                 if (res.data.status === 200) {
                     setProperty(res.data.property);
                     setUser(res.data.user);
-                    console.log(res.data);
                 } else {
                     setError(true);
                     setLoading(false);

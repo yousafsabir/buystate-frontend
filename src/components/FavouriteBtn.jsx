@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFavourites } from "../redux/slices/Property";
@@ -15,7 +15,10 @@ const FavouriteBtn = ({
     const { favourites, loading } = useSelector((state) => state.property);
     const favourite = favourites?.includes(id);
     // returning boolean to property card for button's positioning
-    setFavourite(favourite);
+    // wrapped in useEffect to eliminate this warning: "react: cannot update a component while rendering a different component"
+    useEffect(() => {
+        setFavourite(favourite);
+    }, []);
 
     const submit = () => {
         if (!user) {
