@@ -59,4 +59,14 @@ export const cities = {
         "bannu",
         "topi",
     ],
+    "gilgit baltistan": [
+        "skardu",
+        "chilas",
+        "jaglot",
+        "khaplo",
+        "shigar",
+        "tolti",
+        "karimabad",
+        "danyor",
+    ],
 };

@@ -44,7 +44,7 @@ export const register = createAsyncThunk(
                 image,
                 imageId,
             });
-            if (res.data.status === 200) {
+            if (res.data.status === 201) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return res.data.user;
             } else {

@@ -17,6 +17,7 @@ const Favourites = () => {
 
     useEffect(() => {
         const unsub = async () => {
+            if (!user) return;
             try {
                 setLoading(true);
                 const res = await axios.post(
@@ -47,10 +48,10 @@ const Favourites = () => {
             } catch (e) {
                 setError({
                     isError: true,
-                    message: e.message,
+                    message: e?.message,
                 });
                 setLoading(false);
-                console.log("message", e.message);
+                console.log("message", e?.message);
                 console.log("error", e);
             }
         };
@@ -152,20 +153,8 @@ const Favourites = () => {
             <section className="property-grid grid">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-12">
-                            <div className="grid-option">
-                                <form>
-                                    <select className="custom-select">
-                                        <option defaultChecked>All</option>
-                                        <option value="1">New to Old</option>
-                                        <option value="2">For Rent</option>
-                                        <option value="3">For Sale</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
                         {properties?.map((property) => {
-                            if (!suspends.includes(property._id)) {
+                            if (!suspends?.includes(property._id)) {
                                 return (
                                     <div
                                         className="col-md-4"
