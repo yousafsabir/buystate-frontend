@@ -224,8 +224,8 @@ const Footer = () => {
                                     </a>
                                 </span>
                                 <br />
-                                Developed with 🔥 & 💖 by{" "}
-                                <span className="color-a">M.Yousaf</span>
+                                Developed with 💖 & 🔥 by{" "}
+                                <a href="https://linkedin.com/in/yousafsabir" target="_blank"><span className="color-a">M.Yousaf</span></a>
                                 <br />
                                 in <span className="color-a">
                                     Hackathon
